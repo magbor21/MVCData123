@@ -13,10 +13,7 @@ namespace MVCData123.Controllers
         {                      
             ViewBag.headline = "Welcome to my page";
             ViewBag.text = "Click on People in the menu above to get started";
-            ViewBag.sort = "Name";
-            ViewBag.AscDesc = "Ascending";
-            ViewBag.Search = "";
-            //alla prylar 
+           
             return View();
         }
     }

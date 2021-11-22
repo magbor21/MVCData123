@@ -61,20 +61,65 @@ a {
 
 div {
     display: block;
+    width: fit-content;
+    
 }
 
 main {
     margin: 10px 10px 10px 10px;
 }
 
-div.resultat {
-    margin: 10px 10px 10px 10px;
+#search {
+    background-color: lightblue;
+    border: solid 1px dodgerblue;
+    padding: 10px 10px 10px 10px;
+    margin: 5px 5px 5px 5px;
+}
+
+#addPerson {
+    background-color: lightblue;
+    border: solid 1px dodgerblue;
+    padding: 10px 10px 10px 10px;
+    margin: 5px 5px 5px 5px;
+}
+
+#listOfPeople {
+    background-color: lightblue;
+    border: solid 1px dodgerblue;
+    padding: 10px 10px 10px 10px;
+    margin: 5px 5px 5px 5px;
 }
 
 form {
-    padding: 20px 20px 20px 20px;
+    padding: 0px 10px 0px 10px;
+    margin: 0px 0px 0px 0px;
+    
+
 }
 
+
+input { 
+    margin: 2px 2px 2px 2px;
+    min-width: 50px;
+}
+
+table {
+    padding: 0px 10px 0px 10px;
+    background-color: aliceblue;
+}
+tr {
+    border-bottom: 1px solid black;
+}
+
+th {
+    border-bottom: 1px solid black;
+
+}
+
+
+td {
+    padding: 5px 5px 5px 5px;
+}
 
 
 

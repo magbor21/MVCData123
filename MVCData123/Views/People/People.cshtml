@@ -5,30 +5,19 @@
 }
 
 
-@if (ViewBag.headline != null)
-{
-    <h2>@ViewBag.headline</h2>
-}
-
-@if (ViewBag.text != null)
-{
-    <div>
-        @ViewBag.text
-
-
-    </div>
-}
+<h2>People Index</h2> 
 
 <div id="search">
-    <form>
-        search for stuff
-
+    <form asp-controller="People" asp-action="People" method="post"> <!-- Search form-->
+        <label asp-for="SearchTerm"></label><br />
+        <input asp-for="SearchTerm" /><br />
+        <input type="submit" value="Search"/><br/>
     </form>
-    blabla search bla
+    
 </div>
 
 <div id="addPerson">
-    <form asp-controller="People" asp-action="People" method="post">
+    <form asp-controller="People" asp-action="People" method="post"> <!-- Add people-->
         <label asp-for="Name"></label><br />
         <input asp-for="Name" /><br />
         <label asp-for="Phone"></label><br />
@@ -39,37 +28,60 @@
     </form>
 </div>
 
-<div id="listOfPeople">
+<div id="listOfPeople"> <!-- The list of people-->
 
     <table>
         <tr>
-            <th> Name</th>
-            <th> City</th>
-            <th> Phone</th>
-            <th> Delete?</th>
-            <!--//klickbar. Ta bort allt. KOm ihåg de. om det hinnst -->
-    </tr>
+            <th>
+                <form asp-controller="People" asp-action="People" method="post">
+                    <!-- buttons for sorting -->
+                    <input type="hidden" name="SortBy" value="name" />
+                    <input type="submit" value="Name" />
+                </form>
+            </th>
+            <th>
+                <form asp-controller="People" asp-action="People" method="post">
+                    <input type="hidden" name="SortBy" value="city" />
+                    <input type="submit" value="City" />
+                </form>
+            </th>
+            <th>
+                <form asp-controller="People" asp-action="People" method="post">
+                    <input type="hidden" name="SortBy" value="phone" />
+                    <input type="submit" value="Phone" />
+                </form>
+            </th>
 
-    @if(Model.Persons != null)
-    {
-        @foreach(var item in Model.Persons)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.City</td>
-                <td>@item.Phone</td>
-                <td>
-
-                </td>
-               
+            <th>
+                <form asp-controller="People" asp-action="People" method="post">
+                    <!-- and clearing the board -->
+                    <input type="hidden" name="DeleteALL" value="Yes" />
+                    <input type="submit" value="Delete" />
+                </form>
+            </th>
 
         </tr>
+
+        @if (Model.pvm.Persons != null)
+        {
+            @foreach (var item in Model.pvm.Persons) 
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.City</td>
+                    <td>@item.Phone</td>
+                    <td>
+                        <form asp-controller="People" asp-action="People" method="post"> <!-- and an option to remove them -->
+                            <input type="hidden" name="DeleteID" value="@item.PersonId" />
+                            <input type="submit" value="&#10007;" />
+                        </form>
+                    </td>
+
+                </tr>
             }
         }
-    <!---@foreach   - -->
-
-
+        
 
     </table>
-    liist
+   
 </div>

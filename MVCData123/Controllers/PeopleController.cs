@@ -12,46 +12,76 @@ namespace MVCData123.Controllers
         public IActionResult People()
         {
             if (Person.ListOfPeople.Count < 1)
-                Person.GeneratePeople();
+                Person.GeneratePeople(); //Adds a few people to work with 
 
-            ViewBag.headline = "Welcome to my page";
-            ViewBag.text = "Click on People in the menu above to get started";
+            Person.Sortby = "name"; //Initial settings for sorter
+            Person.Asc = true;
 
-            PeopleViewModel peopleViewModel = new PeopleViewModel();
+            CreatePersonViewModel createPersonViewModel = new CreatePersonViewModel();
+            createPersonViewModel.pvm = new PeopleViewModel();
+            createPersonViewModel.pvm.Persons = new List<Person>();
+            createPersonViewModel.pvm.Persons = Person.ListOfPeople;
 
-            peopleViewModel.Persons = Person.ListOfPeople;
-
-            return View(peopleViewModel);
+            return View(createPersonViewModel);
 
         }
+       
 
         [HttpPost]
-        public IActionResult Delete(string ButtonDelete)
+        public IActionResult People(CreatePersonViewModel createPersonViewModel)
         {
-            
-            PeopleViewModel peopleViewModel = new PeopleViewModel();
-            if(ButtonDelete != null)
-                Person.DeleteById(1000002);
-
-            peopleViewModel.Persons = Person.ListOfPeople;
-
-            return View(peopleViewModel);
-        }
-
-        [HttpPost]
-        public IActionResult People(PeopleViewModel peopleViewModel)
-        {
-
-            if (ModelState.IsValid)
+            if(createPersonViewModel.DeleteID != null) // Delete one
             {
-                Person person; 
-                peopleViewModel.person = new Person { Name = "olle", Phone = peopleViewModel.Phone, City = peopleViewModel.City, PersonId = PersonEnumerator.NextPersonId() };
-                Person.ListOfPeople.Add(peopleViewModel.person);
+                Person.ListOfPeople.Remove(Person.ListOfPeople.Find(x => x.PersonId.ToString().Equals(createPersonViewModel.DeleteID)));
             }
 
-            //PeopleViewModel peopleViewModel = new PeopleViewModel();
-            peopleViewModel.Persons = Person.ListOfPeople;
-            return View(peopleViewModel);
+
+            if(createPersonViewModel.DeleteALL != null && createPersonViewModel.DeleteALL == "Yes") // or Delete all
+            {
+                Person.ListOfPeople.Clear();
+            }
+
+
+
+            if (ModelState.IsValid) //Only adds if everything is filled in
+            {
+                createPersonViewModel.person = new Person(createPersonViewModel.Name, createPersonViewModel.Phone, createPersonViewModel.City);
+                Person.ListOfPeople.Add(createPersonViewModel.person);
+            }
+            
+
+            
+            createPersonViewModel.pvm.Persons = Person.ListOfPeople;
+            if (createPersonViewModel.SearchTerm != null && createPersonViewModel.SearchTerm != "")
+            {
+                createPersonViewModel.pvm.Filter(createPersonViewModel.SearchTerm);
+            }
+
+            if (createPersonViewModel.SortBy != null) // It was easier to sort the list myself than to get the built in sorter to stop complaining.
+            {
+                if (createPersonViewModel.SortBy == Person.Sortby)
+                    Person.Asc = !Person.Asc; // For the future. Not implemented yet
+                else
+                    Person.Sortby = createPersonViewModel.SortBy;
+                switch (Person.Sortby)
+                {
+                    case "phone":
+                        createPersonViewModel.pvm.SortPhone();
+                        break;
+                    case "city":
+                        createPersonViewModel.pvm.SortCity();
+                        break;
+                    default:
+                        createPersonViewModel.pvm.SortName();
+                        break;
+                }
+
+
+            }
+
+
+
+            return View(createPersonViewModel);
 
         }
     }

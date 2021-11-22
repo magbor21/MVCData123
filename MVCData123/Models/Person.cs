@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MVCData123.Models
 {
 
-    public static class PersonEnumerator
+    public static class PersonEnumerator //Adds unique numbers starting with 1 000 001
     {
         
             private static int personId = 1000000;
@@ -22,24 +22,34 @@ namespace MVCData123.Models
 
     public class Person
     {
-        public int PersonId { get; set; }
+        public int PersonId { get; set; } 
         public string Name { get; set; }
         public string Phone { get; set; }
         public string City { get; set; }
-        public static List<Person> ListOfPeople = new List<Person>();
+        public static List<Person> ListOfPeople = new List<Person>(); // Static list. Master copy of people
+        public static string Sortby { get; set; }
+        public static bool Asc { get; set; }
 
 
+        public Person(string Name, string Phone, string City) // A constructor, if you want one
+        {
+            this.Name = Name;
+            this.Phone = Phone;
+            this.City = City;
+            this.PersonId = PersonEnumerator.NextPersonId();
+
+        }
 
 
-        public static void GeneratePeople()
+        public static void GeneratePeople() // some people to start with
         {
             ListOfPeople.AddRange(new List<Person> {
-                    new Person{Name = "Kalle", Phone = "123454562131",City = "Örebro", PersonId = PersonEnumerator.NextPersonId()},
-                    new Person{Name = "Anna", Phone = "040-5102456",City = "Kullavik", PersonId = PersonEnumerator.NextPersonId()},
-                    new Person{Name = "Leif", Phone = "031-170920", City = "Göteborg", PersonId = PersonEnumerator.NextPersonId()}});
+                    new Person("Kalle Banan","0123-454562","Örebro"),
+                    new Person("Anna Book", "040-5102456","Kullavik"),
+                    new Person("Leif Pettersson","031-170920", "Göteborg") });
         } 
 
-        public static bool DeleteById(int idNumber)
+        public static bool DeleteById(int idNumber) // Find and delete the person (idNumber is a hidden field in the table)
         {
             var itemToRemove = ListOfPeople.SingleOrDefault(r => r.PersonId == idNumber);
             if (itemToRemove != null)
