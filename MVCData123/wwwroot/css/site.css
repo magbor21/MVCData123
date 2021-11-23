@@ -59,12 +59,6 @@ a {
     color: black;
 }
 
-div {
-    display: block;
-    width: fit-content;
-    
-}
-
 main {
     margin: 10px 10px 10px 10px;
 }
@@ -74,6 +68,7 @@ main {
     border: solid 1px dodgerblue;
     padding: 10px 10px 10px 10px;
     margin: 5px 5px 5px 5px;
+    width: fit-content;
 }
 
 #addPerson {
@@ -81,6 +76,7 @@ main {
     border: solid 1px dodgerblue;
     padding: 10px 10px 10px 10px;
     margin: 5px 5px 5px 5px;
+    width: fit-content;
 }
 
 #listOfPeople {
@@ -88,40 +84,21 @@ main {
     border: solid 1px dodgerblue;
     padding: 10px 10px 10px 10px;
     margin: 5px 5px 5px 5px;
+    width: fit-content;
 }
 
 form {
     padding: 0px 10px 0px 10px;
     margin: 0px 0px 0px 0px;
-    
+  
 
 }
-
-
-input { 
-    margin: 2px 2px 2px 2px;
-    min-width: 50px;
+input {
+    width: 100%;
+    font-weight: bolder;
+    margin-bottom: 2px;
+   
 }
-
-table {
-    padding: 0px 10px 0px 10px;
-    background-color: aliceblue;
-}
-tr {
-    border-bottom: 1px solid black;
-}
-
-th {
-    border-bottom: 1px solid black;
-
-}
-
-
-td {
-    padding: 5px 5px 5px 5px;
-}
-
-
 
 footer {
     position: relative;

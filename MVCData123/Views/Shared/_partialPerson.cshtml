@@ -1,0 +1,16 @@
+﻿@model Person
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">@Model.Name</div>
+        <div class="col-sm-3">@Model.City</div>
+        <div class="col-sm-3">@Model.Phone</div>
+        <div class="col-sm-2">
+            <form asp-controller="People" asp-action="People" method="post">
+                <!-- and an option to remove them -->
+                <input type="hidden" name="DeleteID" value="@Model.PersonId" />
+                <input type="submit" value="&#10007;" />
+            </form>
+        </div>
+    </div>
+</div>

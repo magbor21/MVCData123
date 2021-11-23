@@ -30,58 +30,48 @@
 
 <div id="listOfPeople"> <!-- The list of people-->
 
-    <table>
-        <tr>
-            <th>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
                 <form asp-controller="People" asp-action="People" method="post">
                     <!-- buttons for sorting -->
                     <input type="hidden" name="SortBy" value="name" />
                     <input type="submit" value="Name" />
                 </form>
-            </th>
-            <th>
+            </div>
+            <div class="col-sm-3">
                 <form asp-controller="People" asp-action="People" method="post">
                     <input type="hidden" name="SortBy" value="city" />
                     <input type="submit" value="City" />
                 </form>
-            </th>
-            <th>
+            </div>
+
+            <div class="col-sm-3">
                 <form asp-controller="People" asp-action="People" method="post">
                     <input type="hidden" name="SortBy" value="phone" />
                     <input type="submit" value="Phone" />
                 </form>
-            </th>
+            </div>    
 
-            <th>
+            <div class="col-sm-3">
                 <form asp-controller="People" asp-action="People" method="post">
-                    <!-- and clearing the board -->
-                    <input type="hidden" name="DeleteALL" value="Yes" />
-                    <input type="submit" value="Delete" />
+                        <!-- and clearing the board -->
+                        <input type="hidden" name="DeleteALL" value="Yes" />
+                        <input type="submit" value="Delete" />
                 </form>
-            </th>
-
-        </tr>
+            </div>
+        </div>
 
         @if (Model.pvm.Persons != null)
         {
             @foreach (var item in Model.pvm.Persons) 
             {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.City</td>
-                    <td>@item.Phone</td>
-                    <td>
-                        <form asp-controller="People" asp-action="People" method="post"> <!-- and an option to remove them -->
-                            <input type="hidden" name="DeleteID" value="@item.PersonId" />
-                            <input type="submit" value="&#10007;" />
-                        </form>
-                    </td>
-
-                </tr>
+                <partial name="_partialPerson" model="item" />
+                
             }
         }
         
 
-    </table>
+    </div>
    
 </div>
