@@ -12,7 +12,7 @@ namespace MVCData123.Models
     public static class PersonEnumerator //Adds unique numbers starting with 1 000 001
     {
         
-            private static int personId = 1000000;
+            private static int personId = 0;
 
             public static int NextPersonId() // Adds 1 to personID and returns it
             {
@@ -37,13 +37,6 @@ namespace MVCData123.Models
             this.Phone = Phone;
             this.City = City;
             this.PersonId = PersonEnumerator.NextPersonId();
-
-        }
-
-        public Person()
-        {
-
-
 
         }
 

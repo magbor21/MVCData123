@@ -12,8 +12,9 @@ namespace MVCData123.Controllers
     {
         public IActionResult Ajax()
         {
-            if (Person.ListOfPeople.Count < 1)
-                Person.GeneratePeople(); //Adds a few people to work with 
+            PersonMemory personMemory = new PersonMemory();
+            //if(personMemory.Count < 1) troubleshooting
+                personMemory.Repopulate(); //Adds a few people to work with 
 
             return View();
         }
@@ -22,9 +23,8 @@ namespace MVCData123.Controllers
         public IActionResult ListPeople()
         {      
             PersonMemory personMemory = new PersonMemory();
-            List<Person> personList = personMemory.Read();
-
-            return PartialView("_limitedPeoplePartial", personList);
+            
+            return PartialView("_limitedPeoplePartial", personMemory);
         }
 
         [HttpPost]

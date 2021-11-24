@@ -18,7 +18,7 @@ function deleteId() {
     })
         .done(function () {
             document.getElementById('errorMessages').innerHTML = "Successfully Deleted Person.";
-            ListThePeople();
+            listThePeople();
         })
         .fail(function () {
             document.getElementById('errorMessages').innerHTML = "Could not delete the person.";

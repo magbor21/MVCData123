@@ -7,26 +7,26 @@ namespace MVCData123.Models
 {
     public class PersonMemory
     {
-        private List<Person> _personlist = new List<Person>(); 
+        public static List<Person> Personlist = new List<Person>(); 
 
-        public int Count { get { return _personlist.Count; } }
+        public int Count { get { return Personlist.Count; } }
         public List<Person> Read()
         {
-            return _personlist;
+            return Personlist;
         }
 
         public Person Read(int id)
         {
-            Person targetPerson = _personlist.Find(c => c.PersonId == id);
+            Person targetPerson = Personlist.Find(c => c.PersonId == id);
             return targetPerson;
         }
 
         public bool Delete(int id)
         {
-            var itemToRemove = _personlist.SingleOrDefault(r => r.PersonId == id);
+            var itemToRemove = Personlist.SingleOrDefault(r => r.PersonId == id);
             if (itemToRemove != null)
             {
-                return _personlist.Remove(itemToRemove);
+                return Personlist.Remove(itemToRemove);
             }
 
             return false;
@@ -36,7 +36,7 @@ namespace MVCData123.Models
         public Person Create(string Name, string City, string Phone)
         {
             Person newPerson = new Person(Name,Phone,City);
-            _personlist.Add(newPerson);
+            Personlist.Add(newPerson);
             return newPerson;
         }
 
