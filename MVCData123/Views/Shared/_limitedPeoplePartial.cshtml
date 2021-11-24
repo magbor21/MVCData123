@@ -1,0 +1,18 @@
+﻿@model PersonMemory
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"> Name </div>
+        <div class="col-sm-3"> ID </div>
+
+    </div>
+</div>
+
+@if (Model.Count > 0)
+{
+    @foreach (var item in Model.Read())
+    {
+<partial name="_limitedPersonPartial" model="item" />
+    }
+}

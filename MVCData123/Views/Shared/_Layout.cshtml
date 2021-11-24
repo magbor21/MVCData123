@@ -5,8 +5,6 @@
     <title>@ViewData["Title"]MCV Data 123</title>
     <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="~/css/site.css" />
 
 </head>
@@ -26,6 +24,10 @@
                     <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "People" ? "active" : "")" asp-area="" asp-controller="People" asp-action="People">People</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "Ajax" ? "active" : "")" asp-area="" asp-controller="Ajax" asp-action="Ajax">Ajax</a>
+                </li>
+
             </ul>
         </nav>
 
@@ -42,5 +44,9 @@
         @DateTime.Now.ToString("yyyy-MM-dd") © Magnus Borglund
     </footer>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="~/js/ajaxview.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

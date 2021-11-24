@@ -40,6 +40,12 @@ namespace MVCData123.Models
 
         }
 
+        public Person()
+        {
+
+
+
+        }
 
         public static void GeneratePeople() // some people to start with
         {

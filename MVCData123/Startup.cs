@@ -43,6 +43,10 @@ namespace MVCData123
                     name: "People",
                     pattern: "{controller=People}/{action=Index}/{id?}"
                 );
+                endpoints.MapControllerRoute(
+                   name: "Ajax",
+                   pattern: "{controller=Ajax}/{action=Index}/{id?}"
+               );
             });
         }
     }
