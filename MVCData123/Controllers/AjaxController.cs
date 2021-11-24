@@ -13,7 +13,7 @@ namespace MVCData123.Controllers
         public IActionResult Ajax()
         {
             PersonMemory personMemory = new PersonMemory();
-            //if(personMemory.Count < 1) troubleshooting
+            if(personMemory.Count < 1) 
                 personMemory.Repopulate(); //Adds a few people to work with 
 
             return View();

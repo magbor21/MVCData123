@@ -11,13 +11,22 @@ namespace MVCData123.Models
     public class CreatePersonViewModel
     {
 
+        [Display(Name="Full Name")]
         [Required(ErrorMessage = "Name is required")] //Only 3 fields are required for adding people
+        [RegularExpression(@"^[^0-9]*",
+         ErrorMessage = "No numbers in the name")]
         public string Name { get; set; }
 
+        [Display(Name="Phone number")] 
         [Required(ErrorMessage = "Phone Number is required")]
+        [RegularExpression(@"^[^A-Za-z]*",
+         ErrorMessage = "No letters in the phone number")]
         public string Phone { get; set; }
 
+        [Display(Name="City /Location")]
         [Required(ErrorMessage = "City is required")]
+        [RegularExpression(@"^[^0-9]*",
+         ErrorMessage = "No numbers in the city name")]
         public string City { get; set; }
 
 

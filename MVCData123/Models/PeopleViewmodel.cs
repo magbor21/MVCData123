@@ -8,7 +8,7 @@ namespace MVCData123.Models
     public class PeopleViewModel
     {
         public List<Person> Persons = new List<Person>();
-        public void Filter(string searchString)
+        public List<Person> Filter(string searchString)
         {
             List<Person> tempList = new List<Person>();
             foreach( Person p in Persons)
@@ -17,8 +17,9 @@ namespace MVCData123.Models
                 if (p.Name.Contains(searchString) || p.City.Contains(searchString) || p.Phone.Contains(searchString)) // Checks all fields for the search term
                     tempList.Add(p);
             }
-            Persons = tempList; //Replaces the old list with the new. The original people are safe in the Person.listOfPeople
-            return;
+            Persons = tempList;
+            return tempList; //Replaces the old list with the new. The original people are safe in the Person.listOfPeople
+            
         }
 
         public void SortName() /// sorts by name

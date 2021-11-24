@@ -22,47 +22,71 @@ namespace MVCData123.Controllers
             createPersonViewModel.pvm.Persons = new List<Person>();
             createPersonViewModel.pvm.Persons = Person.ListOfPeople;
 
-            return View(createPersonViewModel);
+            return View("People", createPersonViewModel);
 
         }
-       
+
 
         [HttpPost]
-        public IActionResult People(CreatePersonViewModel createPersonViewModel)
+        public IActionResult DeleteID(CreatePersonViewModel createPersonViewModel)
         {
-            if(createPersonViewModel.DeleteID != null) // Delete one
+            if (createPersonViewModel.DeleteID != null) // Delete one
             {
                 Person.ListOfPeople.Remove(Person.ListOfPeople.Find(x => x.PersonId.ToString().Equals(createPersonViewModel.DeleteID)));
+                createPersonViewModel.pvm.Persons = Person.ListOfPeople;
             }
+            return View("People",createPersonViewModel);
+        }
 
-
-            if(createPersonViewModel.DeleteALL != null && createPersonViewModel.DeleteALL == "Yes") // or Delete all
+        [HttpPost]
+        public IActionResult DeleteAll(CreatePersonViewModel createPersonViewModel)
+        {
+            if (createPersonViewModel.DeleteALL != null && createPersonViewModel.DeleteALL == "Yes") // or Delete all
             {
                 Person.ListOfPeople.Clear();
+                createPersonViewModel.pvm.Persons.Clear();
             }
+            return View("People", createPersonViewModel);
 
+        }
 
+        [HttpPost]
+        public IActionResult Create(CreatePersonViewModel createPersonViewModel)
+        {
 
             if (ModelState.IsValid) //Only adds if everything is filled in
             {
                 createPersonViewModel.person = new Person(createPersonViewModel.Name, createPersonViewModel.Phone, createPersonViewModel.City);
                 Person.ListOfPeople.Add(createPersonViewModel.person);
+                
             }
-            
+            createPersonViewModel.pvm.Persons = Person.ListOfPeople;
+            return View("People", createPersonViewModel);
+        }
 
-            
+        [HttpPost]
+        public IActionResult Search(CreatePersonViewModel createPersonViewModel)
+        {
+
+           
             createPersonViewModel.pvm.Persons = Person.ListOfPeople;
             if (createPersonViewModel.SearchTerm != null && createPersonViewModel.SearchTerm != "")
             {
                 createPersonViewModel.pvm.Filter(createPersonViewModel.SearchTerm);
             }
+            
+            return View("People", createPersonViewModel);
+
+        }
+
+        [HttpPost]
+        public IActionResult Sort(CreatePersonViewModel createPersonViewModel)
+        {
 
             if (createPersonViewModel.SortBy != null) // It was easier to sort the list myself than to get the built in sorter to stop complaining.
             {
-                if (createPersonViewModel.SortBy == Person.Sortby)
-                    Person.Asc = !Person.Asc; // For the future. Not implemented yet
-                else
-                    Person.Sortby = createPersonViewModel.SortBy;
+                Person.Sortby = createPersonViewModel.SortBy;
+                createPersonViewModel.pvm.Persons = Person.ListOfPeople;
                 switch (Person.Sortby)
                 {
                     case "phone":
@@ -76,12 +100,9 @@ namespace MVCData123.Controllers
                         break;
                 }
 
-
             }
 
-
-
-            return View(createPersonViewModel);
+            return View("People", createPersonViewModel);
 
         }
     }

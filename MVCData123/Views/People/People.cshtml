@@ -8,70 +8,80 @@
 <h2>People Index</h2> 
 
 <div id="search">
-    <form asp-controller="People" asp-action="People" method="post"> <!-- Search form-->
+    <form asp-controller="People" asp-action="Search" method="post"> <!-- Search form-->
         <label asp-for="SearchTerm"></label><br />
-        <input asp-for="SearchTerm" /><br />
+        <input asp-for="SearchTerm" value="@Model.SearchTerm"/><br />
         <input type="submit" value="Search"/><br/>
     </form>
     
 </div>
 
 <div id="addPerson">
-    <form asp-controller="People" asp-action="People" method="post"> <!-- Add people-->
-        <label asp-for="Name"></label><br />
-        <input asp-for="Name" /><br />
-        <label asp-for="Phone"></label><br />
-        <input asp-for="Phone" /><br />
-        <label asp-for="City"></label><br />
-        <input asp-for="City" /><br />
-        <input type="submit" value="Create person"/><br/>
+    <form asp-controller="People" asp-action="Create" method="post" role="form">
+        <!-- Add people-->
+        <div>
+            <label asp-for="Name"></label><br />
+            <input asp-for="Name" /><br />
+            <span style="color:rebeccapurple" asp-validation-for="Name"></span> <br/>
+            <label asp-for="Phone"></label><br />
+            <input asp-for="Phone" /><br />
+            <span style="color:rebeccapurple" asp-validation-for="Phone"></span><br />
+            <label asp-for="City"></label><br />
+            <input asp-for="City" /><br />
+            <span style="color:rebeccapurple" asp-validation-for="City"></span><br />
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" name="btnAddPerson" value="Add Person" />
+        </div>
     </form>
 </div>
 
-<div id="listOfPeople"> <!-- The list of people-->
+
+<div id="listOfPeople">
+    <!-- The list of people-->
 
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <form asp-controller="People" asp-action="People" method="post">
+                <form asp-controller="People" asp-action="Sort" method="post">
                     <!-- buttons for sorting -->
                     <input type="hidden" name="SortBy" value="name" />
                     <input type="submit" value="Name" />
                 </form>
             </div>
             <div class="col-sm-3">
-                <form asp-controller="People" asp-action="People" method="post">
+                <form asp-controller="People" asp-action="Sort" method="post">
                     <input type="hidden" name="SortBy" value="city" />
                     <input type="submit" value="City" />
                 </form>
             </div>
 
             <div class="col-sm-3">
-                <form asp-controller="People" asp-action="People" method="post">
+                <form asp-controller="People" asp-action="Sort" method="post">
                     <input type="hidden" name="SortBy" value="phone" />
                     <input type="submit" value="Phone" />
                 </form>
-            </div>    
+            </div>
 
             <div class="col-sm-3">
-                <form asp-controller="People" asp-action="People" method="post">
-                        <!-- and clearing the board -->
-                        <input type="hidden" name="DeleteALL" value="Yes" />
-                        <input type="submit" value="Delete" />
+                <form asp-controller="People" asp-action="DeleteAll" method="post">
+                    <!-- and clearing the board -->
+                    <input type="hidden" name="DeleteALL" value="Yes" />
+                    <input type="submit" value="Delete" />
                 </form>
             </div>
         </div>
 
         @if (Model.pvm.Persons != null)
         {
-            @foreach (var item in Model.pvm.Persons) 
+            @foreach (var item in Model.pvm.Persons)
             {
                 <partial name="_personPartial" model="item" />
-                
+
             }
         }
-        
+
 
     </div>
-   
+
 </div>

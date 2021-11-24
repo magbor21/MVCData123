@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MVCData123.Models
 {
-    public class PersonMemory
+    public class PersonMemory // New Model for the Uppgift3
     {
         public static List<Person> Personlist = new List<Person>(); 
 
