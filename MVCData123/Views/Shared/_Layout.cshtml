@@ -28,6 +28,10 @@
                     <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "Ajax" ? "active" : "")" asp-area="" asp-controller="Ajax" asp-action="Ajax">Ajax</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "EntityFramework" ? "active" : "")" asp-area="" asp-controller="EntityFramework" asp-action="EntityFramework">EntityFramework</a>
+                </li>
+
             </ul>
         </nav>
 
@@ -46,6 +50,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="~/js/efview.js"></script>
     <script src="~/js/ajaxview.js"></script>
     @RenderSection("Scripts", required: false)
 </body>

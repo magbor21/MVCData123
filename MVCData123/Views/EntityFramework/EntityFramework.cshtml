@@ -1,0 +1,43 @@
+﻿@model PersonModel
+
+@{
+    ViewData["Title"] = "EntityFramework";
+}
+
+
+<h1>Entity Framework</h1>
+
+<div id="errorEFMessages"></div>
+
+<div id="addPerson">
+    <form asp-controller="EntityFramework" asp-action="PersonAdd" method="post" role="form">
+        <!-- Add people-->
+        <div>
+            <label asp-for="Name"></label><br />
+            <input asp-for="Name" /><br />
+            <span style="color:rebeccapurple" asp-validation-for="Name"></span> <br />
+            <label asp-for="Phone"></label><br />
+            <input asp-for="Phone" /><br />
+            <span style="color:rebeccapurple" asp-validation-for="Phone"></span><br />
+            <label asp-for="City"></label><br />
+            <input asp-for="City" /><br />
+            <span style="color:rebeccapurple" asp-validation-for="City"></span><br />
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" name="btnAddPerson" value="Add Person" />
+        </div>
+    </form>
+</div>
+
+
+<div id="PersonEFList"></div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <input type="button" class="btn btn-primary" onclick="listTheEFPeople()" value="List the People" />
+        </div>
+    </div>
+</div>
+

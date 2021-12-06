@@ -1,0 +1,13 @@
+﻿@model PersonModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">@Model.Name</div>
+        <div class="col-sm-2">@Model.City</div>
+        <div class="col-sm-2">@Model.Phone</div>
+        <div class="col-sm-1">
+            <input type="button" class="btn btn-primary" onclick="deleteEFId(this,  @Model.Id)" value="&#10007;" />
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<PersonModel>
+
+
+<div class="container" id="fet">
+    <div class="row">
+        <div class="col-sm-2"> Name </div>
+        <div class="col-sm-2"> City </div>
+        <div class="col-sm-2"> Phone </div>
+        <div class="col-sm-2"> Delete </div>
+    </div>
+</div>
+
+@if (Model.Any() == true)
+{
+    @foreach (var item in Model)
+    {
+        <partial name="_personEFPartial" model="item" />
+    }
+}

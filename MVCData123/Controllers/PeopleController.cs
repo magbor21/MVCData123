@@ -70,6 +70,7 @@ namespace MVCData123.Controllers
 
            
             createPersonViewModel.pvm.Persons = Person.ListOfPeople;
+
             if (createPersonViewModel.SearchTerm != null && createPersonViewModel.SearchTerm != "")
             {
                 createPersonViewModel.pvm.Filter(createPersonViewModel.SearchTerm);

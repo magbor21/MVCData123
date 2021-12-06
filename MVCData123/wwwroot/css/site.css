@@ -87,6 +87,19 @@ main {
     width: fit-content;
 }
 
+#PeopleEFList {
+    background-color: lightblue;
+    border: solid 1px dodgerblue;
+    padding: 10px 10px 10px 10px;
+    margin: 5px 5px 5px 5px;
+    width: fit-content;
+}
+
+#fet {
+    font-weight: bold;
+}
+
+
 form {
     padding: 0px 10px 0px 10px;
     margin: 0px 0px 0px 0px;
