@@ -1,0 +1,36 @@
+﻿@model Country
+@{
+    ViewData["Title"] = "Countries ";
+}
+
+
+<h1>Entity Framework Countries </h1>
+
+<div id="errorEFMessages"></div>
+
+<div id="addCountry">
+    <form asp-controller="Country" asp-action="CountryAdd" method="post" role="form">
+        <div>
+            <label asp-for="Name"></label><br />
+            <input asp-for="Name" /><br />
+            <span style="color:rebeccapurple" asp-validation-for="Name"></span> <br />
+        </div>
+
+        <div>
+            <input type="submit" class="btn btn-primary" name="btnAddCountry" value="Add Country" />
+        </div>
+    </form>
+</div>
+
+
+<div id="CountryEFList"></div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <input type="button" class="btn btn-primary" onclick="listTheEFCountries()" value="List the Countries" />
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,19 @@
+﻿@model City
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">@Model.Name</div>
+        <div class="col-sm-2">@Model.CurrentCountry.Name</div>
+        <div class="col-sm-2">@Model.Citizens.Count()</div>
+        <div class="col-sm-2">
+            <input type="button" class="btn btn-primary" onclick="cityDetails(this,  @Model.Id)" value="Details;" />
+        </div>
+        <div class="col-sm-2">
+            @if (Model.Citizens.Count() == 0)
+            {
+                <input type="button" class="btn btn-primary" onclick="deleteEFId(this,  @Model.Id)" value="&#10007;" />
+            }
+        </div>
+
+    </div>
+</div>

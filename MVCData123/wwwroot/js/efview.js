@@ -18,3 +18,15 @@ function deleteEFId(element, num) {
             document.getElementById('errorEFMessages').innerHTML = "Could not delete the person.";
         });
 }
+
+function listTheEFCountries() {
+    $.get("/Country/ListCountries", null, function (data) {
+        $("#CountryEFList").html(data);
+    });
+}
+
+function createCityView() {
+    $.get("/City/CreateView", null, function (data) {
+        $("#CityEFList").html(data);
+    });
+}

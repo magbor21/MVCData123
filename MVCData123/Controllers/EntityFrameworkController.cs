@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MVCData123.Models;
 using MVCData123.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MVCData123.Controllers
 {
@@ -18,6 +19,7 @@ namespace MVCData123.Controllers
         }
         public IActionResult EntityFramework()
         {
+            ViewData["Cities"] = new SelectList(_personContext.Cities, "Id", "Name");
             
             return View();
         }

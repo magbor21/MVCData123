@@ -30,8 +30,9 @@ namespace MVCData123.Models
         [RegularExpression(@"^[^0-9]*",
          ErrorMessage = "No numbers in the city name")]
         [MaxLength(30, ErrorMessage = "Max city name length 30")]
-        public string City { get; set; }
+        public City CurrentCity { get; set; }
+        public int CurrentCityID { get; set; }
 
-        
+
     }
 }

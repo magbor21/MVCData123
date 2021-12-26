@@ -1,4 +1,4 @@
-﻿@model Person 
+﻿@model PersonModel
 <div class="container">
     <div class="row">
         <div class="col-sm-2"> ID </div>
@@ -10,9 +10,9 @@
     @if (Model != null)
     {
         <div class="row">
-            <div class="col-sm-2">@Model.PersonId </div>
+            <div class="col-sm-2">@Model.Id </div>
             <div class="col-sm-2">@Model.Name </div>
-            <div class="col-sm-2">@Model.City </div>
+            <div class="col-sm-2">@Model.CurrentCity.Name </div>
             <div class="col-sm-2">@Model.Phone </div>
         </div>
     }

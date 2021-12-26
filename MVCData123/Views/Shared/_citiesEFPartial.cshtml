@@ -1,0 +1,20 @@
+﻿@model IEnumerable<City>
+
+
+<div class="container" id="fet">
+    <div class="row">
+        <div class="col-sm-2"> Name </div>
+        <div class="col-sm-2"> Country </div>
+        <div class="col-sm-2"> Citizens </div>
+        <div class="col-sm-2"> Details </div>
+        <div class="col-sm-2"> Delete </div>
+    </div>
+</div>
+
+@if (Model.Any() == true)
+{
+    @foreach (var item in Model)
+    {
+        <partial name="_cityEFPartial" model="item" />
+    }
+}
