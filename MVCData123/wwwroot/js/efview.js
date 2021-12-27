@@ -4,8 +4,20 @@
     });
 }
 
+function listTheEFCountries() {
+    $.get("/EntityFramework/ListCountries", null, function (data) {
+        $("#CountryEFList").html(data);
+    });
+}
 
-function deleteEFId(element, num) {
+function listTheEFCities() {
+    $.get("/EntityFramework/ListCities", null, function (data) {
+        $("#CityEFList").html(data);
+    });
+}
+
+
+function deleteEFPersonId(element, num) {
     var personIDValue = num;
     $.post("/EntityFramework/PersonDelete", { personID: personIDValue }, function (data) {
 
@@ -19,14 +31,30 @@ function deleteEFId(element, num) {
         });
 }
 
-function listTheEFCountries() {
-    $.get("/Country/ListCountries", null, function (data) {
-        $("#CountryEFList").html(data);
-    });
+function deleteEFCityId(element, num) {
+    var cityIDValue = num;
+    $.post("/EntityFramework/CityDelete", { cityID: cityIDValue }, function (data) {
+
+    })
+        .done(function () {
+            document.getElementById('errorEFMessages').innerHTML = "Successfully Deleted City.";
+            listTheEFPeople();
+        })
+        .fail(function () {
+            document.getElementById('errorEFMessages').innerHTML = "Could not delete the city.";
+        });
 }
 
-function createCityView() {
-    $.get("/City/CreateView", null, function (data) {
-        $("#CityEFList").html(data);
-    });
+function deleteEFCountryId(element, num) {
+    var countryIDValue = num;
+    $.post("/EntityFramework/CountryDelete", { countryID: countryIDValue }, function (data) {
+
+    })
+        .done(function () {
+            document.getElementById('errorEFMessages').innerHTML = "Successfully Deleted Country.";
+            listTheEFPeople();
+        })
+        .fail(function () {
+            document.getElementById('errorEFMessages').innerHTML = "Could not delete the country.";
+        });
 }

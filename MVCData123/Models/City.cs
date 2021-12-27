@@ -19,9 +19,10 @@ namespace MVCData123.Models
         public string Name { get; set; }
 
         public Country CurrentCountry { get; set; }
+        [Required(ErrorMessage = "Country is required")]
         public int CurrentCountryID { get; set; }
 
-        public ICollection<PersonModel> Citizens  { get; set; }
+        public IEnumerable<PersonModel> Citizens  { get; set; }
 
     }
 }

@@ -25,12 +25,9 @@ namespace MVCData123.Models
         [MaxLength(15, ErrorMessage = "Max phone length 15")]
         public string Phone { get; set; }
 
-        [Display(Name = "City /Location")]
-        [Required(ErrorMessage = "City is required")]
-        [RegularExpression(@"^[^0-9]*",
-         ErrorMessage = "No numbers in the city name")]
-        [MaxLength(30, ErrorMessage = "Max city name length 30")]
+
         public City CurrentCity { get; set; }
+        [Required(ErrorMessage = "City is required")]
         public int CurrentCityID { get; set; }
 
 

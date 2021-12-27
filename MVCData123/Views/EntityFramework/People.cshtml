@@ -9,7 +9,7 @@
 
 <div id="errorEFMessages"></div>
 
-<div id="addPerson">
+<div id="add">
     <form asp-controller="EntityFramework" asp-action="PersonAdd" method="post" role="form">
         <!-- Add people-->
         <div>
@@ -21,9 +21,11 @@
             <span style="color:rebeccapurple" asp-validation-for="Phone"></span><br />
             <div class="control-label">City</div>
 
-            <select asp-for="CurrentCity" class="form-control" asp-items="ViewBag.Cities"> </select> 
+            <select asp-for="CurrentCityID" class="form-control" asp-items="ViewBag.Cities"> </select>
+            <span style="color:rebeccapurple" asp-validation-for="CurrentCityID"></span><br />
             <br />
         </div>
+
         <div>
             <input type="submit" class="btn btn-primary" name="btnAddPerson" value="Add Person" />
         </div>

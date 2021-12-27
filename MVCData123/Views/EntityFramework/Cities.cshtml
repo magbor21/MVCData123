@@ -11,15 +11,16 @@
 
 
 
-<div id="addCity">
-    <form asp-controller="City" asp-action="CityAdd" method="post" role="form">
+<div id="add">
+    <form asp-controller="EntityFramework" asp-action="CityAdd" method="post" role="form">
 
         <div>
             <label asp-for="Name"></label><br />
             <input asp-for="Name" /><br />
             <span style="color:rebeccapurple" asp-validation-for="Name"></span> <br />
             <div class="control-label">Country</div>
-            <select asp-for="CurrentCountry" class="form-control" asp-items="ViewBag.Countries"></select><br />
+            <select asp-for="CurrentCountryID" class="form-control" asp-items="ViewBag.Countries"></select><br />
+            <span style="color:rebeccapurple" asp-validation-for="CurrentCountryID"></span> <br />
 
         </div>
         <div>
@@ -35,9 +36,6 @@
     <div class="row">
         <div class="col-sm-3">
             <input type="button" class="btn btn-primary" onclick="listTheEFCities()" value="List the Cities" />
-        </div>
-        <div class="col-sm-3">
-            <input type="button" class="btn btn-primary" onclick="addEFCity()" value="Add a city" />
         </div>
     </div>
 </div>

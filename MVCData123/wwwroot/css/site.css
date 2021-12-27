@@ -71,7 +71,8 @@ main {
     width: fit-content;
 }
 
-#addPerson {
+#add {
+    width: 200px;
     background-color: lightblue;
     border: solid 1px dodgerblue;
     padding: 10px 10px 10px 10px;

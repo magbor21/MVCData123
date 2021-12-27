@@ -18,7 +18,7 @@ namespace MVCData123.Models
         [MaxLength(30, ErrorMessage = "Max name length 30")]
         public string Name { get; set; }
 
-        public ICollection<City> Cities { get; set; }
+        public IEnumerable<City> Cities { get; set; }
 
     }
 }
