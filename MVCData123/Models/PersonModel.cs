@@ -29,7 +29,7 @@ namespace MVCData123.Models
         public City CurrentCity { get; set; }
         [Required(ErrorMessage = "City is required")]
         public int CurrentCityID { get; set; }
-
+        public virtual ICollection<PersonLanguage> PersonLanguages { get; set; }
 
     }
 }

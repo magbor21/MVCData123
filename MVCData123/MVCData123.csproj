@@ -11,6 +11,16 @@
     <Compile Remove="Migrations\20211205091409_Init2.Designer.cs" />
     <Compile Remove="Migrations\20211205092741_Seeding.cs" />
     <Compile Remove="Migrations\20211205092741_Seeding.Designer.cs" />
+    <Compile Remove="Migrations\20211226173734_Initialize.cs" />
+    <Compile Remove="Migrations\20211226173734_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20211227060548_Seeding.cs" />
+    <Compile Remove="Migrations\20211227060548_Seeding.Designer.cs" />
+    <Compile Remove="Migrations\20211228144735_Seeding.cs" />
+    <Compile Remove="Migrations\20211228144735_Seeding.Designer.cs" />
+    <Compile Remove="Migrations\20211228150007_Seeding.cs" />
+    <Compile Remove="Migrations\20211228150007_Seeding.Designer.cs" />
+    <Compile Remove="Migrations\20211228150115_Many-to-Many.cs" />
+    <Compile Remove="Migrations\20211228150115_Many-to-Many.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -128,6 +128,112 @@ namespace MVCData123.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MVCData123.Models.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 10001,
+                            Name = "Norwegian"
+                        },
+                        new
+                        {
+                            Id = 10002,
+                            Name = "Danish"
+                        },
+                        new
+                        {
+                            Id = 10003,
+                            Name = "Finnish"
+                        },
+                        new
+                        {
+                            Id = 10004,
+                            Name = "English"
+                        },
+                        new
+                        {
+                            Id = 10005,
+                            Name = "Swedish"
+                        });
+                });
+
+            modelBuilder.Entity("MVCData123.Models.PersonLanguage", b =>
+                {
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PersonId", "LanguageId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("PersonLanguages");
+
+                    b.HasData(
+                        new
+                        {
+                            PersonId = 10001,
+                            LanguageId = 10001
+                        },
+                        new
+                        {
+                            PersonId = 10002,
+                            LanguageId = 10001
+                        },
+                        new
+                        {
+                            PersonId = 10003,
+                            LanguageId = 10001
+                        },
+                        new
+                        {
+                            PersonId = 10004,
+                            LanguageId = 10001
+                        },
+                        new
+                        {
+                            PersonId = 10005,
+                            LanguageId = 10001
+                        },
+                        new
+                        {
+                            PersonId = 10005,
+                            LanguageId = 10002
+                        },
+                        new
+                        {
+                            PersonId = 10005,
+                            LanguageId = 10003
+                        },
+                        new
+                        {
+                            PersonId = 10005,
+                            LanguageId = 10004
+                        },
+                        new
+                        {
+                            PersonId = 10005,
+                            LanguageId = 10005
+                        });
+                });
+
             modelBuilder.Entity("MVCData123.Models.PersonModel", b =>
                 {
                     b.Property<int>("Id")
@@ -206,7 +312,7 @@ namespace MVCData123.Migrations
                         },
                         new
                         {
-                            Id = 10009,
+                            Id = 10005,
                             CurrentCityID = 10007,
                             Name = "Adam of Eternia",
                             Phone = "010-123456777"
@@ -218,6 +324,21 @@ namespace MVCData123.Migrations
                     b.HasOne("MVCData123.Models.Country", "CurrentCountry")
                         .WithMany("Cities")
                         .HasForeignKey("CurrentCountryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MVCData123.Models.PersonLanguage", b =>
+                {
+                    b.HasOne("MVCData123.Models.Language", "Language")
+                        .WithMany("PersonLanguages")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVCData123.Models.PersonModel", "Person")
+                        .WithMany("PersonLanguages")
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

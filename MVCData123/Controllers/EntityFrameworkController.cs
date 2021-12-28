@@ -16,6 +16,7 @@ namespace MVCData123.Controllers
         public EntityFrameworkController(PersonContext personContext)
         {
             _personContext = personContext;
+
         }
         public IActionResult Index()
         {

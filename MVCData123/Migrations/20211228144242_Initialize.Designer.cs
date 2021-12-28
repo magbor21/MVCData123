@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCData123.Migrations
 {
     [DbContext(typeof(PersonContext))]
-    [Migration("20211226173734_Initialize")]
+    [Migration("20211228144242_Initialize")]
     partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,6 +59,38 @@ namespace MVCData123.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("MVCData123.Models.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
+                });
+
+            modelBuilder.Entity("MVCData123.Models.PersonLanguage", b =>
+                {
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PersonId", "LanguageId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("PersonLanguages");
+                });
+
             modelBuilder.Entity("MVCData123.Models.PersonModel", b =>
                 {
                     b.Property<int>("Id")
@@ -91,6 +123,21 @@ namespace MVCData123.Migrations
                     b.HasOne("MVCData123.Models.Country", "CurrentCountry")
                         .WithMany("Cities")
                         .HasForeignKey("CurrentCountryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MVCData123.Models.PersonLanguage", b =>
+                {
+                    b.HasOne("MVCData123.Models.Language", "Language")
+                        .WithMany("PersonLanguages")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVCData123.Models.PersonModel", "Person")
+                        .WithMany("PersonLanguages")
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
