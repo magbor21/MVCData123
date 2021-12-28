@@ -1,0 +1,38 @@
+﻿@model Country
+
+@if (Model != null)
+{
+
+    <div class="container" id="add">
+        <div class="input-group">
+
+            <label for="@Model.Id">Country ID</label>
+            <input type="text" value="@Model.Id" disabled />
+        </div>
+        <div class="input-group">
+            <label for="@Model.Name">Country Name</label>
+            <input type="text" value="@Model.Name" disabled />
+
+        </div>
+
+        <div>
+            @if (Model.Cities.Count() > 0)
+            {
+                <ul class="list-group">
+
+                    <li class="list-group-item list-group-item-success">Cities</li>
+
+                    @foreach (City item in Model.Cities)
+                    {
+                        <li class="list-group-item list-group-item-light">@item.Name</li>
+                    }
+
+                </ul>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <span style="color:red">No country data available</span>
+}

@@ -59,3 +59,17 @@ function deleteEFCountryId(element, num) {
             document.getElementById('errorEFMessages').innerHTML = "Could not delete the country.";
         });
 }
+
+function countryDetails(element, num) {
+    var countryIDValue = num;
+    $.post("/EntityFramework/CountryDetails", { countryID: countryIDValue }, function (data) {
+        $("#countryEFList").html(data);
+    });
+}
+
+function cityDetails(element, num) {
+    var cityIDValue = num;
+    $.post("/EntityFramework/CityDetails", { cityID: cityIDValue }, function (data) {
+        $("#cityEFList").html(data);
+    });
+}

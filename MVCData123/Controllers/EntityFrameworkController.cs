@@ -144,7 +144,7 @@ namespace MVCData123.Controllers
             return StatusCode(404);
         }
 
-            [HttpPost]
+        [HttpPost]
         public IActionResult CountryAdd(Country country)
         {
             if (ModelState.IsValid)
@@ -154,5 +154,35 @@ namespace MVCData123.Controllers
             }
             return View("Countries");
         }
+
+        [HttpPost]
+        public IActionResult CountryDetails(int countryID)
+        {
+            Country country = _personContext.Countries.Find(countryID);
+
+            if(country != null)
+            {
+                var cities = _personContext.Cities.Where(ci => ci.CurrentCountryID == country.Id);
+                country.Cities = cities.ToList();
+            }
+            
+            return PartialView("_countryDetailPartial", country);
+        }
+
+        [HttpPost]
+        public IActionResult CityDetails(int cityID)
+        {
+            City city = _personContext.Cities.Find(cityID);
+
+            if (city != null)
+            {
+                var citizens = _personContext.Persons.Where(pm => pm.CurrentCityID == city.Id);
+                city.Citizens = citizens.ToList();
+                city.CurrentCountry = _personContext.Countries.Find(city.CurrentCountryID);
+            }
+
+            return PartialView("_cityDetailPartial", city);
+        }
+
     }
 }

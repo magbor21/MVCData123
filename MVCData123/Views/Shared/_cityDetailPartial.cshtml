@@ -1,0 +1,41 @@
+﻿@model City
+
+@if(Model != null)
+{
+    <div class="container" id="add">
+        <div class="input-group">
+
+            <label for="@Model.Id">City ID</label>
+            <input type="text" value="@Model.Id" disabled />
+        </div>
+        <div class="input-group">
+            <label for="@Model.Name">Name</label>
+            <input type="text" value="@Model.Name" disabled />
+
+        </div>
+        <div class="input-group">
+            <label for="@Model.CurrentCountry.Name">Country</label>
+            <input type="text" value="@Model.CurrentCountry.Name" disabled />
+
+        </div>
+
+        <div>
+            @if (Model.Citizens.Count() > 0)
+            {
+                <ul class="list-group">
+
+                    <li class="list-group-item list-group-item-success">Citizens</li>
+
+                    @foreach (PersonModel item in Model.Citizens)
+                    {
+                        <li class="list-group-item list-group-item-light">@item.Name</li>
+                    }
+
+                </ul>
+            }
+        </div>
+    </div>
+}else
+{
+    <span style="color:red">No city data available</span>
+}
