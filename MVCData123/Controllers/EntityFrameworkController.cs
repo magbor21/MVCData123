@@ -59,7 +59,8 @@ namespace MVCData123.Controllers
             List<Country> ListOfCountries = _personContext.Countries.ToList();
             foreach (Country co in ListOfCountries)
             {
-                co.Cities = (IEnumerable<City>)_personContext.Cities.Where<City>(ci => ci.CurrentCountryID == co.Id);
+                var cities = _personContext.Cities.Where(ci => ci.CurrentCountryID == co.Id);
+                co.Cities = cities.ToList();
             }
             return PartialView("_countriesEFPartial", ListOfCountries);
         }
@@ -70,7 +71,9 @@ namespace MVCData123.Controllers
             List<City> ListOfCities = _personContext.Cities.ToList();
             foreach (City ci in ListOfCities)
             {
-                ci.Citizens = (IEnumerable<PersonModel>)_personContext.Persons.Where(p => p.CurrentCityID == ci.Id);
+                var models = _personContext.Persons.Where(p => p.CurrentCityID == ci.Id);
+                ci.Citizens = models.ToList();
+                
                 ci.CurrentCountry = _personContext.Countries.Find(ci.CurrentCountryID);
             }
 

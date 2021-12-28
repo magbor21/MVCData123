@@ -1,18 +1,19 @@
-﻿function listTheEFPeople() {
-    $.get("/EntityFramework/ListPeople", null, function (data) {
-        $("#PersonEFList").html(data);
-    });
-}
-
+﻿
 function listTheEFCountries() {
     $.get("/EntityFramework/ListCountries", null, function (data) {
-        $("#CountryEFList").html(data);
+        $("#countryEFList").html(data);
     });
 }
 
 function listTheEFCities() {
     $.get("/EntityFramework/ListCities", null, function (data) {
-        $("#CityEFList").html(data);
+        $("#cityEFList").html(data);
+    });
+}
+
+function listTheEFPeople() {
+    $.get("/EntityFramework/ListPeople", null, function (data) {
+        $("#personEFList").html(data);
     });
 }
 
@@ -38,7 +39,7 @@ function deleteEFCityId(element, num) {
     })
         .done(function () {
             document.getElementById('errorEFMessages').innerHTML = "Successfully Deleted City.";
-            listTheEFPeople();
+            listTheEFCities();
         })
         .fail(function () {
             document.getElementById('errorEFMessages').innerHTML = "Could not delete the city.";
@@ -52,7 +53,7 @@ function deleteEFCountryId(element, num) {
     })
         .done(function () {
             document.getElementById('errorEFMessages').innerHTML = "Successfully Deleted Country.";
-            listTheEFPeople();
+            listTheEFCountries();
         })
         .fail(function () {
             document.getElementById('errorEFMessages').innerHTML = "Could not delete the country.";
