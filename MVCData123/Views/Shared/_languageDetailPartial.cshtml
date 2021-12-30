@@ -1,0 +1,36 @@
+﻿@model Language
+
+@if(Model != null)
+{
+    <div class="container" id="add">
+        <div class="input-group">
+
+            <label for="@Model.Id">Language ID</label>
+            <input type="text" value="@Model.Id" disabled />
+        </div>
+        <div class="input-group">
+            <label for="@Model.Name">Name</label>
+            <input type="text" value="@Model.Name" disabled />
+
+        </div>
+
+        <div>
+            @if (Model.Persons.Count() > 0)
+            {
+                <ul class="list-group">
+
+                    <li class="list-group-item list-group-item-success">Speakers</li>
+
+                    @foreach (PersonModel item in Model.Persons)
+                    {
+                        <li class="list-group-item list-group-item-light">@item.Name</li>
+                    }
+
+                </ul>
+            }
+        </div>
+    </div>
+}else
+{
+    <span style="color:red">No language data available</span>
+}

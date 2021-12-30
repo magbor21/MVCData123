@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using MVCData123.Data;
+using MVCData123.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using MVCData123.Models;
-using MVCData123.Data;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MVCData123.Controllers
 {
@@ -41,6 +39,11 @@ namespace MVCData123.Controllers
             return View();
         }
 
+        public IActionResult Languages()
+        {
+            return View();
+        }
+
 
         [HttpGet]
         public IActionResult ListPeople()
@@ -49,6 +52,7 @@ namespace MVCData123.Controllers
             foreach(PersonModel pm in ListOfPerson)
             {               
                 pm.CurrentCity = _personContext.Cities.Find(pm.CurrentCityID);
+                pm.PersonLanguages = _personContext.PersonLanguages.Where(pl => pl.PersonId == pm.Id).ToList();
             }
             return PartialView("_peopleEFPartial", ListOfPerson);
         }
@@ -64,6 +68,20 @@ namespace MVCData123.Controllers
                 co.Cities = cities.ToList();
             }
             return PartialView("_countriesEFPartial", ListOfCountries);
+        }
+
+        [HttpGet]
+        public IActionResult ListLanguages()
+        {
+            List<Language> ListOfLanguages = _personContext.Languages.ToList();
+            
+            foreach (Language l in ListOfLanguages)
+            {
+                var personLanguages = _personContext.PersonLanguages.Where(pl => pl.LanguageId == l.Id);
+                l.PersonLanguages = personLanguages.ToList();
+            }
+            
+            return PartialView("_languagesEFPartial", ListOfLanguages);
         }
 
         [HttpGet]
@@ -103,7 +121,7 @@ namespace MVCData123.Controllers
                 _personContext.Persons.Add(personModel);
                 _personContext.SaveChanges();
             }
-            return View("People");
+            return RedirectToAction("PeopleS");
         }
 
         [HttpPost]
@@ -128,7 +146,7 @@ namespace MVCData123.Controllers
                 _personContext.Cities.Add(city); 
                 _personContext.SaveChanges();
             }
-            return View("Cities");
+            return RedirectToAction("Cities");
         }
 
         [HttpPost]
@@ -139,6 +157,20 @@ namespace MVCData123.Controllers
             if (itemToRemove != null)
             {
                 _personContext.Countries.Remove(itemToRemove);
+                _personContext.SaveChanges();
+                return StatusCode(200);
+            }
+            return StatusCode(404);
+        }
+
+        [HttpPost]
+        public IActionResult LanguageDelete(int languageID)
+        {
+
+            var itemToRemove = _personContext.Languages.SingleOrDefault(r => r.Id == languageID);
+            if (itemToRemove != null)
+            {
+                _personContext.Languages.Remove(itemToRemove);
                 _personContext.SaveChanges();
                 return StatusCode(200);
             }
@@ -157,6 +189,17 @@ namespace MVCData123.Controllers
         }
 
         [HttpPost]
+        public IActionResult LanguageAdd(Language language)
+        {
+            if (ModelState.IsValid)
+            {
+                _personContext.Languages.Add(language);
+                _personContext.SaveChanges();
+            }
+            return View("Languages");
+        }
+
+        [HttpPost]
         public IActionResult CountryDetails(int countryID)
         {
             Country country = _personContext.Countries.Find(countryID);
@@ -168,6 +211,24 @@ namespace MVCData123.Controllers
             }
             
             return PartialView("_countryDetailPartial", country);
+        }
+
+        [HttpPost]
+        public IActionResult LanguageDetails(int languageID)
+        {
+            Language language = _personContext.Languages.Find(languageID);
+
+            if (language != null)
+            {
+                var persons = _personContext.Persons
+                                .Where(p => p.PersonLanguages
+                                .Any(pl => pl.LanguageId == language.Id));
+
+                language.Persons = persons.ToList();
+               
+            }
+
+            return PartialView("_languageDetailPartial", language);
         }
 
         [HttpPost]
@@ -185,5 +246,50 @@ namespace MVCData123.Controllers
             return PartialView("_cityDetailPartial", city);
         }
 
+        [HttpPost]
+        public IActionResult PersonDetails(int personID)
+        {
+            PersonModel personmodel = _personContext.Persons.Find(personID);
+
+            if (personmodel != null)
+            {
+                personmodel.CurrentCity = _personContext.Cities.Find(personmodel.CurrentCityID);
+
+                var personlanguages = _personContext.PersonLanguages.Where(pl => pl.PersonId == personmodel.Id).ToList();
+                
+                
+                foreach(PersonLanguage p in personlanguages)
+                {
+                    p.Language = _personContext.Languages.Find(p.LanguageId);
+                }
+
+                personmodel.PersonLanguages = personlanguages;
+
+                personmodel.Languages = _personContext.Languages.ToList();
+                
+            }
+
+            return PartialView("_personEFDetailPartial", personmodel);
+        }
+
+        [HttpPost]
+
+        public IActionResult PersonLanguageAdd(int PersonID, int LanguageID)
+        {
+            PersonLanguage pl = new PersonLanguage { PersonId = PersonID, LanguageId = LanguageID };
+            
+            try{
+                _personContext.PersonLanguages.Add(pl);
+                _personContext.SaveChanges();            
+            }
+            
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+            {
+                return StatusCode(404);
+            }
+            
+            return StatusCode(200);         
+            
+        }
     }
 }

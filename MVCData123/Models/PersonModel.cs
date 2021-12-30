@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,7 +30,10 @@ namespace MVCData123.Models
         public City CurrentCity { get; set; }
         [Required(ErrorMessage = "City is required")]
         public int CurrentCityID { get; set; }
-        public virtual ICollection<PersonLanguage> PersonLanguages { get; set; }
+
+        [NotMapped]
+        public virtual IEnumerable<Language> Languages { get; set; }
+        public virtual IEnumerable<PersonLanguage> PersonLanguages { get; set; }
 
     }
 }

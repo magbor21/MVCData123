@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,6 +19,8 @@ namespace MVCData123.Models
         [MaxLength(30, ErrorMessage = "Max name length 30")]
         public string Name { get; set; }
 
+        [NotMapped]
+        public virtual IEnumerable<PersonModel> Persons { get; set; }
         public virtual IEnumerable<PersonLanguage> PersonLanguages { get; set; }
 
     }

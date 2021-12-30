@@ -18,6 +18,7 @@ namespace MVCData123.Data
         public DbSet<Country> Countries { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<PersonLanguage> PersonLanguages { get; set; }
+        
 
 
 
@@ -33,17 +34,22 @@ namespace MVCData123.Data
                 .WithMany(co => co.Cities)
                 .HasForeignKey(c => c.CurrentCountryID);
 
-            modelbuilder.Entity<PersonLanguage>().HasKey(pl => new { pl.PersonId, pl.LanguageId });
+            
+            modelbuilder.Entity<PersonLanguage>()
+                .HasKey(pl => new { pl.PersonId, pl.LanguageId });
 
             modelbuilder.Entity<PersonLanguage>()
-                .HasOne(pl => pl.Person)
-                .WithMany(pm => pm.PersonLanguages)
-                .HasForeignKey(pl => pl.PersonId);
+                .HasOne(x => x.Person)
+                .WithMany(y => y.PersonLanguages)
+                .HasForeignKey(y => y.PersonId);
 
             modelbuilder.Entity<PersonLanguage>()
-                .HasOne(pl => pl.Language)
-                .WithMany(l => l.PersonLanguages)
-                .HasForeignKey(pl => pl.LanguageId);
+                .HasOne(x => x.Language)
+                .WithMany(y => y.PersonLanguages)
+                .HasForeignKey(y => y.LanguageId);
+
+
+
 
 
             modelbuilder.Entity<Country>().HasData(new Country { Id = 10001, Name = "Norway" });
@@ -74,8 +80,7 @@ namespace MVCData123.Data
             modelbuilder.Entity<Language>().HasData(new Language { Id = 10003, Name = "Finnish" });
             modelbuilder.Entity<Language>().HasData(new Language { Id = 10004, Name = "English" });
             modelbuilder.Entity<Language>().HasData(new Language { Id = 10005, Name = "Swedish" });
-
-          
+         
 
             modelbuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { PersonId = 10001, LanguageId = 10001 });
             modelbuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { PersonId = 10002, LanguageId = 10001 });
@@ -86,6 +91,7 @@ namespace MVCData123.Data
             modelbuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { PersonId = 10005, LanguageId = 10003 });
             modelbuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { PersonId = 10005, LanguageId = 10004 });
             modelbuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { PersonId = 10005, LanguageId = 10005 });
+
         }
     }
 }

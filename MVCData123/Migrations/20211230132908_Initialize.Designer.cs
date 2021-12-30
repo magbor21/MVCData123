@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCData123.Migrations
 {
     [DbContext(typeof(PersonContext))]
-    [Migration("20211228151016_Seeding")]
-    partial class Seeding
+    [Migration("20211230132908_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

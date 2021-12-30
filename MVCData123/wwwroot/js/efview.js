@@ -17,8 +17,14 @@ function listTheEFPeople() {
     });
 }
 
+function listTheEFLanguages() {
+    $.get("/EntityFramework/ListLanguages", null, function (data) {
+        $("#languageEFList").html(data);
+    });
+}
 
-function deleteEFPersonId(element, num) {
+
+function deleteEFPersonId(element, num) { /* fiza language */
     var personIDValue = num;
     $.post("/EntityFramework/PersonDelete", { personID: personIDValue }, function (data) {
 
@@ -60,6 +66,20 @@ function deleteEFCountryId(element, num) {
         });
 }
 
+function deleteEFLanguageId(element, num) {
+    var languageIDValue = num;
+    $.post("/EntityFramework/LanguageDelete", { languageID: languageIDValue }, function (data) {
+
+    })
+        .done(function () {
+            document.getElementById('errorEFMessages').innerHTML = "Successfully Deleted Language.";
+            listTheEFCountries();
+        })
+        .fail(function () {
+            document.getElementById('errorEFMessages').innerHTML = "Could not delete the language.";
+        });
+}
+
 function countryDetails(element, num) {
     var countryIDValue = num;
     $.post("/EntityFramework/CountryDetails", { countryID: countryIDValue }, function (data) {
@@ -72,4 +92,32 @@ function cityDetails(element, num) {
     $.post("/EntityFramework/CityDetails", { cityID: cityIDValue }, function (data) {
         $("#cityEFList").html(data);
     });
+}
+
+function languageDetails(element, num) {
+    var languageIDValue = num;
+    $.post("/EntityFramework/LanguageDetails", { languageID: languageIDValue }, function (data) {
+        $("#languageEFList").html(data);
+    });
+}
+
+function personDetails(element, num) {
+    var personIDValue = num;
+    $.post("/EntityFramework/PersonDetails", { personID: personIDValue }, function (data) {
+        $("#personEFList").html(data);
+    });
+}
+
+function personLanguageAdd(element, num) {
+    var personIDValue = num;
+    $.post("/EntityFramework/PersonLanguageAdd", { PersonID: personIDValue, LanguageID: document.getElementById('selectedLanguage').value }, function (data) {
+
+    })
+        .done(function () {
+            document.getElementById('errorEFMessages').innerHTML = "Successfully Added Language.";
+            personDetails(element, num);
+        })
+        .fail(function () {
+            document.getElementById('errorEFMessages').innerHTML = "Could not add the language.";
+        });
 }

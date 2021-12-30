@@ -1,0 +1,36 @@
+﻿@model Language
+@{
+    ViewData["Title"] = "Languages ";
+}
+
+
+<h1>Entity Framework Languages </h1>
+
+<div id="errorEFMessages"></div>
+
+<div id="add">
+    <form asp-controller="EntityFramework" asp-action="LanguageAdd" method="post" role="form">
+        <div>
+            <label asp-for="Name"></label><br />
+            <input asp-for="Name" /><br />
+            <span style="color:rebeccapurple" asp-validation-for="Name"></span> <br />
+        </div>
+
+        <div>
+            <input type="submit" class="btn btn-primary" name="btnAddLanguage" value="Add Language" />
+        </div>
+    </form>
+</div>
+
+
+<div id="languageEFList"></div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <input type="button" class="btn btn-primary" onclick="listTheEFLanguages()" value="List the Languages" />
+        </div>
+    </div>
+</div>
+

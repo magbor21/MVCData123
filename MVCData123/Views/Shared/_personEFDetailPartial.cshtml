@@ -1,0 +1,61 @@
+﻿@model PersonModel
+
+@if(Model != null)
+{
+<div class="container" id="add">
+    <div class="input-group">
+
+        <label for="@Model.Id">Person ID</label>
+        <input type="text" value="@Model.Id" disabled />
+    </div>
+    <div class="input-group">
+        <label for="@Model.Name">Name</label>
+        <input type="text" value="@Model.Name" disabled />
+    </div>
+    <div class="input-group">
+        <label for="@Model.CurrentCity.Name">City</label>
+        <input type="text" value="@Model.CurrentCity.Name" disabled />
+    </div>
+    <div class="input-group">
+        <label for="@Model.Phone">City</label>
+        <input type="text" value="@Model.Phone" disabled />
+    </div>
+
+    <div>
+        @if (Model.PersonLanguages.Count() > 0)
+        {
+            <ul class="list-group">
+
+                <li class="list-group-item list-group-item-success">Languages</li>
+
+                @foreach (PersonLanguage item in Model.PersonLanguages)
+                {
+                    <li class="list-group-item list-group-item-light">@item.Language.Name</li>
+                }
+            </ul>
+        }
+    </div>
+</div>
+
+
+<div class="container" id="add">
+    @if (Model.Languages.Count() != 0)
+    {
+        <label>All Languages</label>
+
+        <select id="selectedLanguage">
+            @foreach (Language language in Model.Languages)
+            {
+                        <option value="@language.Id">@language.Name</option>
+            }
+        </select>
+        <input type="button" class="btn btn-primary" onclick="personLanguageAdd(this,  @Model.Id)" value="Add Language" />
+    }
+</div>
+
+   
+}
+else
+{
+    <span style="color:red">No city data available</span>
+    }
