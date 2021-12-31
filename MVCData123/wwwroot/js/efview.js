@@ -1,9 +1,10 @@
-﻿
+﻿/* List things*/
+
 function listTheEFCountries() {
     $.get("/EntityFramework/ListCountries", null, function (data) {
         $("#countryEFList").html(data);
     });
-}
+} 
 
 function listTheEFCities() {
     $.get("/EntityFramework/ListCities", null, function (data) {
@@ -23,8 +24,8 @@ function listTheEFLanguages() {
     });
 }
 
-
-function deleteEFPersonId(element, num) { /* fiza language */
+/* delete things*/
+function deleteEFPersonId(element, num) { 
     var personIDValue = num;
     $.post("/EntityFramework/PersonDelete", { personID: personIDValue }, function (data) {
 
@@ -73,13 +74,14 @@ function deleteEFLanguageId(element, num) {
     })
         .done(function () {
             document.getElementById('errorEFMessages').innerHTML = "Successfully Deleted Language.";
-            listTheEFCountries();
+            listTheEFLanguages();
         })
         .fail(function () {
             document.getElementById('errorEFMessages').innerHTML = "Could not delete the language.";
         });
 }
 
+/* Details */
 function countryDetails(element, num) {
     var countryIDValue = num;
     $.post("/EntityFramework/CountryDetails", { countryID: countryIDValue }, function (data) {
@@ -108,6 +110,8 @@ function personDetails(element, num) {
     });
 }
 
+
+/* Only thing added through here */
 function personLanguageAdd(element, num) {
     var personIDValue = num;
     $.post("/EntityFramework/PersonLanguageAdd", { PersonID: personIDValue, LanguageID: document.getElementById('selectedLanguage').value }, function (data) {

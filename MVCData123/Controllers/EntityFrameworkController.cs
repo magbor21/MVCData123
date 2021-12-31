@@ -21,7 +21,7 @@ namespace MVCData123.Controllers
             return View();
         }
 
-        public IActionResult PeopleS()
+        public IActionResult PeopleS()  // renamed to avoid a false positive "Active" in the top menu bar
         {
             ViewData["Cities"] = new SelectList(_personContext.Cities, "Id", "Name");
             
@@ -46,13 +46,13 @@ namespace MVCData123.Controllers
 
 
         [HttpGet]
-        public IActionResult ListPeople()
+        public IActionResult ListPeople() 
         {
             List<PersonModel> ListOfPerson = _personContext.Persons.ToList();
             foreach(PersonModel pm in ListOfPerson)
             {               
                 pm.CurrentCity = _personContext.Cities.Find(pm.CurrentCityID);
-                pm.PersonLanguages = _personContext.PersonLanguages.Where(pl => pl.PersonId == pm.Id).ToList();
+                pm.PersonLanguages = _personContext.PersonLanguages.Where(pl => pl.PersonId == pm.Id).ToList(); // Uses personLanguage for counting
             }
             return PartialView("_peopleEFPartial", ListOfPerson);
         }
