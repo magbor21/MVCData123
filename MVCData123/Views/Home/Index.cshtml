@@ -1,4 +1,5 @@
-﻿
+﻿@model HomeViewModel
+
 @{
     ViewData["Title"] = "Home";
 }
@@ -13,6 +14,26 @@
 {
     <div>
         @ViewBag.text
+
+    </div>
+
+}
+
+@if (Model != null)
+{
+    <div>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-primary">Statistics</li>
+            <li class="list-group-item ">People:    @Model.People.ToString()</li>
+            <li class="list-group-item ">Cities:    @Model.Cities.ToString()</li>
+            <li class="list-group-item ">Countries: @Model.Countries.ToString()</li>
+            <li class="list-group-item ">Languages: @Model.Languages.ToString()</li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="list-group-item ">Users: @Model.Users.ToString()</li>
+
+                }
+         </ul>
 
 
     </div>

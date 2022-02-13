@@ -4,35 +4,68 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewData["Title"]MCV Data 123</title>
     <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/css/site.css" />
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+       <link rel="stylesheet" href="~/css/site.css" /> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
 
 </head>
-<body>
+
+<body class="h-100">
     <header>
-        <nav class="navbar">
-            <ul class="navbar-nav">
-                <li>
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MVCData123</a>
-                </li>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #6969ff;">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MVCData123</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <partial name="_LoginPartial" />
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Old
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" asp-area="" asp-controller="People" asp-action="People">People</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Ajax" asp-action="Ajax">Ajax</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="EntityFramework" asp-action="Index">EntityFramework</a>
+                        </div>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "People" ? "active" : "")" asp-area="" asp-controller="People" asp-action="People">People</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "Ajax" ? "active" : "")" asp-area="" asp-controller="Ajax" asp-action="Ajax">Ajax</a>
-                </li>
+                    @if (User.IsInRole("User") || User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="IDPeople" asp-action="Index">People</a>
+                        </li>
+                    }
 
-                <li class="nav-item">
-                    <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "EntityFramework" ? "active" : "")" asp-area="" asp-controller="EntityFramework" asp-action="Index">EntityFramework</a>
-                </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="IDCities" asp-action="Index">Cities</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="IDCountries" asp-action="Index">Countries</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="IDLanguages" asp-action="Index">Language</a>
+                        </li>
 
-            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="IDUsers" asp-action="Index">Users</a>
+                        </li>
+                    }
+
+
+
+
+                </ul>
+            </div>
         </nav>
 
     </header>
@@ -44,12 +77,16 @@
         </div>
     </main>
 
-    <footer>
-        @DateTime.Now.ToString("yyyy-MM-dd") © Magnus Borglund
+    <footer class="card-footer justify-content-center fixed-bottom">
+        <div class="container">
+            <span class="text-muted">@DateTime.Now.ToString("yyyy-MM-dd") © Magnus Borglund</span>
+        </div>
     </footer>
+   
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="~/js/efview.js"></script>
     <script src="~/js/ajaxview.js"></script>
     @RenderSection("Scripts", required: false)

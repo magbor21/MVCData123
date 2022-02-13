@@ -9,6 +9,8 @@ namespace MVCData123.Models
     public class Country
     {
         [Key]
+
+        [Display(Name = "ID")]
         public int Id { get; set; }
 
         [Display(Name = "Name")]

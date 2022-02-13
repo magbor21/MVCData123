@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MVCData123.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace MVCData123
 {
@@ -39,6 +41,14 @@ namespace MVCData123
             services.AddDbContext<PersonContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<PersonContext>();
+
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
 
         }
 
@@ -49,10 +59,22 @@ namespace MVCData123
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
@@ -72,7 +94,27 @@ namespace MVCData123
                    name: "EntityFramework",
                    pattern: "{controller=EntityFramework}/{action=Index}/{id?}"
                 );
-
+                endpoints.MapControllerRoute(
+                   name: "IDCities",
+                   pattern: "{controller=IDCities}/{action=Index}/{id?}"
+                );
+                endpoints.MapControllerRoute(
+                   name: "IDCountries",
+                   pattern: "{controller=IDCountries}/{action=Index}/{id?}"
+                );
+                endpoints.MapControllerRoute(
+                   name: "IDPeople",
+                   pattern: "{controller=IDPeople}/{action=Index}/{id?}"
+                );
+                endpoints.MapControllerRoute(
+                   name: "IDLanguages",
+                   pattern: "{controller=IDLanguages}/{action=Index}/{id?}"
+                );
+                endpoints.MapControllerRoute(
+                   name: "IDUsers",
+                   pattern: "{controller=IDUsers}/{action=Index}/{id?}"
+                );
+                endpoints.MapRazorPages();
 
             });
         }

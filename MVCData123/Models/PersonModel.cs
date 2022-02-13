@@ -13,7 +13,7 @@ namespace MVCData123.Models
         public int Id { get; set; }
 
         [Display(Name = "Name")]
-        [Required(ErrorMessage = "Name is required")] //Only 3 fields are required for adding people
+        [Required(ErrorMessage = "Name is required")] 
         [RegularExpression(@"^[^0-9]*",
          ErrorMessage = "No numbers in the name")]
         [MaxLength(30, ErrorMessage = "Max name length 30")]

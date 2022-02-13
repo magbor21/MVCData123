@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using MVCData123.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVCData123.Data
 {
-    public class PersonContext : DbContext
+    public class PersonContext : IdentityDbContext<ApplicationUser>
     {
         public PersonContext(DbContextOptions<PersonContext> options) : base(options)
         {
@@ -18,12 +20,14 @@ namespace MVCData123.Data
         public DbSet<Country> Countries { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<PersonLanguage> PersonLanguages { get; set; }
-        
+        public DbSet<ApplicationUser> Users { get; set; }
 
 
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
+            base.OnModelCreating(modelbuilder);
+
             modelbuilder.Entity<PersonModel>()
                 .HasOne(pm => pm.CurrentCity)
                 .WithMany(c => c.Citizens)
@@ -47,10 +51,6 @@ namespace MVCData123.Data
                 .HasOne(x => x.Language)
                 .WithMany(y => y.PersonLanguages)
                 .HasForeignKey(y => y.LanguageId);
-
-
-
-
 
             modelbuilder.Entity<Country>().HasData(new Country { Id = 10001, Name = "Norway" });
             modelbuilder.Entity<Country>().HasData(new Country { Id = 10002, Name = "Denmark" });
@@ -91,6 +91,66 @@ namespace MVCData123.Data
             modelbuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { PersonId = 10005, LanguageId = 10003 });
             modelbuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { PersonId = 10005, LanguageId = 10004 });
             modelbuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { PersonId = 10005, LanguageId = 10005 });
+
+
+            string roleId = Guid.NewGuid().ToString();
+            string userId = Guid.NewGuid().ToString();
+            string userRoleId = Guid.NewGuid().ToString();
+
+            modelbuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = roleId,
+                Name = "Admin",
+                NormalizedName = "ADMIN"
+            });
+            modelbuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = userRoleId,
+                Name = "User",
+                NormalizedName = "USER"
+            });
+
+            PasswordHasher<ApplicationUser> hasher = new PasswordHasher<ApplicationUser>();
+
+            modelbuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            {
+                Id = userId,
+                Email = "admin@admin.com",
+                NormalizedEmail = "ADMIN@ADMIN.COM",
+                UserName = "Admin",
+                NormalizedUserName = "ADMIN",
+                PasswordHash = hasher.HashPassword(null, "password"),
+                FirstName = "Admin",
+                LastName = "Adminsson",
+                Birthday = new DateTime(2000,1,1)
+            });
+
+            modelbuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = roleId,
+                UserId = userId
+            });
+
+            userId = Guid.NewGuid().ToString();
+
+            modelbuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            {
+                Id = userId,
+                Email = "user@user.com",
+                NormalizedEmail = "USER@USER.COM",
+                UserName = "UserNo1",
+                NormalizedUserName = "UserNo1",
+                PasswordHash = hasher.HashPassword(null, "password"),
+                FirstName = "Usher",
+                LastName = "Raymond IV",
+                Birthday = new DateTime(2001, 2, 3)
+            });
+
+            modelbuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = userRoleId,
+                UserId = userId
+            });
 
         }
     }

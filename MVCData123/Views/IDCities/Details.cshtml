@@ -1,0 +1,55 @@
+﻿@model City
+
+@{
+    ViewData["Title"] = "City Details ";
+}
+
+
+<h1> City Details </h1>
+
+@if (Model != null)
+{
+
+    <div class="container" id="add">
+        <form asp-controller="IDCities" asp-action="CityEdit" method="post" role="form">
+            <div>
+                <label asp-for="Id">City ID: @Model.Id </label><br />
+                <input asp-for="Id" type="text" value="@Model.Id" hidden />
+            </div>
+
+            <div>
+                <label asp-for="Name"></label><br />
+                <input asp-for="Name" value="@Model.Name" /><br />
+            </div>
+            <div>
+                <div class="control-label">Country</div>
+                <select asp-for="CurrentCountryID" class="form-control" asp-items="ViewBag.Countries" ></select><br />
+                <span style="color:rebeccapurple" asp-validation-for="CurrentCountryID"></span> <br />
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" name="btnEditCity" value="Save" />
+            </div>
+
+
+        </form>
+        <div>
+            @if (Model.Citizens.Count() > 0)
+            {
+                <ul class="list-group">
+
+                    <li class="list-group-item list-group-item-success">Citizens</li>
+
+                    @foreach (PersonModel item in Model.Citizens)
+                    {
+                        <input type="button" class="btn btn-primary" onclick="personIDDetails(this,  @item.Id)" value="@item.Name" />
+                    }
+
+                </ul>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <span style="color:red">No country data available</span>
+}

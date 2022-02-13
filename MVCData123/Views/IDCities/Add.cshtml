@@ -1,0 +1,32 @@
+﻿@model City
+
+
+@{
+    ViewData["Title"] = "Add City ";
+}
+
+
+<h1> Add City </h1>
+
+@if (User.IsInRole("Admin"))
+{
+    <div id="add">
+        <form asp-controller="IDCountries" asp-action="CityAdd" method="post" role="form">
+
+            <div>
+                <label asp-for="Name"></label><br />
+                <input asp-for="Name" /><br />
+                <span style="color:rebeccapurple" asp-validation-for="Name"></span> <br />
+            </div>
+            <div>
+                <div class="control-label">Country</div>
+                <select asp-for="CurrentCountryID" class="form-control" asp-items="ViewBag.Countries"></select><br />
+                <span style="color:rebeccapurple" asp-validation-for="CurrentCountryID"></span> <br />
+            </div>
+
+            <div>
+                <input type="submit" class="btn btn-primary" name="btnAddCity" value="Save" />
+            </div>
+        </form>
+    </div>
+}

@@ -1,0 +1,50 @@
+﻿@model Country
+
+@{
+    ViewData["Title"] = "Country Details ";
+}
+
+
+<h1> Country Details </h1>
+
+@if (Model != null)
+{
+
+    <div class="container" id="add">
+        <form asp-controller="IDCountries" asp-action="CountryEdit" method="post" role="form">
+            <div>
+                <label asp-for="Id">Country ID: @Model.Id </label><br />
+                <input asp-for="Id" type="text" value="@Model.Id" hidden/>
+            </div>
+
+            <div>
+                <label asp-for="Name"></label><br />
+                <input asp-for="Name" value="@Model.Name" /><br />
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" name="btnEditCountry" value="Save" />
+            </div>
+
+
+        </form>
+        <div>
+            @if (Model.Cities.Count() > 0)
+            {
+                <ul class="list-group">
+
+                    <li class="list-group-item list-group-item-success">Cities</li>
+
+                    @foreach (City item in Model.Cities)
+                    {
+                        <input type="button" class="btn btn-primary" onclick="cityIDDetails(this,  @item.Id)" value="@item.Name" />
+                    }
+
+                </ul>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <span style="color:red">No country data available</span>
+}
