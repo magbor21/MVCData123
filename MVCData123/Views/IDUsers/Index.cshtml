@@ -1,27 +1,15 @@
-﻿@model IEnumerable<ApplicationUser>
-
+﻿
 @{
-    ViewData["Title"] = "Users ";
+    ViewData["Title"] = "Application Users ";
 }
 
 
-<h1> Users </h1>
+<h1> Application Users </h1>
 
-
-<div class="container" id="fet">
-    <div class="row">
-        <div class="col-sm-2"> Name </div>
-        <div class="col-sm-2"> E-mail </div>
-        <div class="col-sm-2"> Admin? </div>
-        <div class="col-sm-2"> Add  </div>
-        <div class="col-sm-2"> Remove </div>
-    </div>
+<div>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Admins", "IDUsers")'">Admins</button>
 </div>
 
-@if (Model.Any() == true)
-{
-    @foreach (var item in Model)
-    {
-        <partial name="_userIDPartial" model="item" />
-    }
-}
+<div>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Users", "IDUsers")'">Users</button>
+</div>

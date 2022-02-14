@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ApplicationUser>
+
+@{
+    ViewData["Title"] = "Admins ";
+}
+
+
+<h1> Admins </h1>
+
+
+<div class="container" id="fet">
+    <div class="row">
+        <div class="col-sm-2"> User name </div>
+        <div class="col-sm-2"> E-mail </div>
+    </div>
+
+    @if (Model.Any() == true)
+    {
+        @foreach (var item in Model)
+        {
+            <partial name="_usersIDAdminPartial" model="item" />
+        }
+    }
+</div>

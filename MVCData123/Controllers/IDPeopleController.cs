@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MVCData123.Data;
 using MVCData123.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MVCData123.Controllers
 {
@@ -163,6 +164,7 @@ namespace MVCData123.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult LanguageDelete(PersonLanguage pl)
         {
             var itemToDelete = _personContext.PersonLanguages.First(row => row.PersonId == pl.PersonId && row.LanguageId == pl.LanguageId);
@@ -203,6 +205,7 @@ namespace MVCData123.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(PersonModel personModel)
         {
 

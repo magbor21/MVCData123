@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MVCData123.Data;
 using MVCData123.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MVCData123.Controllers
 {
@@ -38,6 +39,7 @@ namespace MVCData123.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult LanguageAdd(Language language)
         {
             if (ModelState.IsValid)
@@ -52,6 +54,7 @@ namespace MVCData123.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Details(Language languageValue)
         {
             Language language = _personContext.Languages.Find(languageValue.Id);
@@ -71,6 +74,7 @@ namespace MVCData123.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult LanguageEdit(Language language)
         {
             if (ModelState.IsValid)
@@ -89,6 +93,7 @@ namespace MVCData123.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(Language language)
         {
 

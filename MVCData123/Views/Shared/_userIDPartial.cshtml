@@ -1,31 +1,19 @@
 ﻿@model ApplicationUser
 
 <div class="container">
-    <div class="row">
+    <dv class="row">
+        <div class="col-sm-2">@Model.FirstName</div>
+        <div class="col-sm-2">@Model.LastName</div>
         <div class="col-sm-2">@Model.UserName</div>
         <div class="col-sm-2">@Model.Email</div>
-        <div class="col-sm-2">@Model.PersonLanguages.Count()</div>
         
         <div class="col-sm-2">
-            <form asp-controller="IDPeople" asp-action="Details" method="post" role="form">
+            <form asp-controller="IDUsers" asp-action="AdminAdd" method="post" role="form">
                 <div>
                     <input asp-for="Id" value="@Model.Id" hidden /><br />
-                    <input type="submit" class="btn btn-primary" name="btnPersonsDetails" value="Details" />
+                    <input type="submit" class="btn btn-primary" name="btnPersonsDetails" value="Yes" />
                 </div>
             </form>
         </div>
-
-        <div class="col-sm-2">
-            @if (User.IsInRole("Admin"))
-            {
-                <form asp-controller="IDPeople" asp-action="Delete" method="post" role="form">
-                    <div>
-                        <input asp-for="Id" value="@Model.Id" hidden /><br />
-                        <input type="submit" class="btn btn-primary" name="btnCityDelete" value="Delete" />
-                    </div>
-                </form>
-            }
-        </div>
-
-        </div>
     </div>
+</div>

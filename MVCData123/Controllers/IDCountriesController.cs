@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MVCData123.Data;
 using MVCData123.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MVCData123.Controllers
 {
@@ -17,6 +18,8 @@ namespace MVCData123.Controllers
             _personContext = personContext;
 
         }
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             List<Country> ListOfCountries = _personContext.Countries.ToList();
@@ -28,12 +31,14 @@ namespace MVCData123.Controllers
             return View("Index", ListOfCountries);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Add()
         {
             return View(); 
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult CountryAdd(Country country)
         {
             if (ModelState.IsValid)
@@ -48,6 +53,7 @@ namespace MVCData123.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Details(Country countryValue)
         {
             Country country = _personContext.Countries.Find(countryValue.Id);
@@ -62,6 +68,7 @@ namespace MVCData123.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult CountryEdit(Country country)
         {
             if (ModelState.IsValid)
@@ -80,6 +87,7 @@ namespace MVCData123.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(Country country)
         {
 
