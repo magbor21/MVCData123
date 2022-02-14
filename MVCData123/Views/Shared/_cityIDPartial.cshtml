@@ -1,31 +1,29 @@
 ﻿@model City
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-2">@Model.Name</div>
-        <div class="col-sm-2">@Model.CurrentCountry.Name</div>
-        <div class="col-sm-2">@Model.Citizens.Count()</div>
-        <div class="col-sm-2">
+
+    <tr>
+        <td>@Model.Name</td>
+        <td>@Model.CurrentCountry.Name</td>
+        <td>@Model.Citizens.Count()</td>
+        <td>
             <form asp-controller="IDCities" asp-action="Details" method="post" role="form">
                 <div>
-                    <input asp-for="Id" value="@Model.Id" hidden /><br />
+                    <input asp-for="Id" value="@Model.Id" hidden />
                     <input type="submit" class="btn btn-primary" name="btnCityDetails" value="Details" />
                 </div>
             </form>
-        </div>
+        
+        </td>
 
-        <div class="col-sm-2">
+        <td>
             @if (Model.Citizens.Count() == 0)
             {
                 <form asp-controller="IDCities" asp-action="Delete" method="post" role="form">
                     <div>
-                        <input asp-for="Id" value="@Model.Id" hidden /><br />
+                        <input asp-for="Id" value="@Model.Id" hidden />
                         <input type="submit" class="btn btn-primary" name="btnCityDelete" value="Delete" />
                     </div>
                 </form>
             }
-        </div>
-
-    </div>
-</div>
-   
+        </td>
+    </tr>

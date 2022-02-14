@@ -4,7 +4,7 @@
 }
 
 
-<h1> Person Details </h1>
+<h3> Person Details </h3>
 
 @if (Model != null)
 {
@@ -35,19 +35,25 @@
 
 
         </form>
+        <br />
         <div>
             @if (Model.PersonLanguages.Count() > 0)
             {
-                <ul class="list-group">
-
-                    <li class="list-group-item list-group-item-success">Languages</li>
-
-                    @foreach (PersonLanguage item in Model.PersonLanguages)
-                    {
-                        <li class="list-group-item">@item.Language.Name</li>                       
-                    }
-
-                </ul>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Languages</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (PersonLanguage item in Model.PersonLanguages)
+                        {
+                        <tr>
+                            <td>@item.Language.Name</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
             }
         </div>
 

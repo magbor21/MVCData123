@@ -5,7 +5,7 @@
 }
 
 
-<h1> Add or remove Languages </h1>
+<h3> Add or remove Languages </h3>
 
 @if (Model != null)
 {
@@ -17,7 +17,7 @@
             </div>
 
             <div>
-                <label> "Name: @Model.Person.Name"</label><br />
+                <label> Name: @Model.Person.Name</label><br />
             </div>
             <div>
                 <div class="control-label">Languages</div>
@@ -29,21 +29,25 @@
             </div>
 
         </form>
+        <br />
         <div>
             @if (Model.Person.PersonLanguages.Count() > 0)
             {
-                <div class="container" id="fet">
-                    <div class="row">
-                        <div class="col-sm-2"> Language </div>
-                        <div class="col-sm-2"> Delete </div>
-                    </div>
-                </div>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Language</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                @foreach (var item in Model.Person.PersonLanguages)
-                {
-                    <partial name="_personIDLangPartial" model="item" />
-                }
-            
+                    @foreach (var item in Model.Person.PersonLanguages)
+                    {
+                        <partial name="_personIDLangPartial" model="item" />
+                    }
+                    </tbody>
+                </table>
             }
         </div>
 

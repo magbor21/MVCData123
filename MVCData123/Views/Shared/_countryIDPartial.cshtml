@@ -1,30 +1,26 @@
 ﻿@model Country
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-2">@Model.Name</div>
-        <div class="col-sm-2">@Model.Cities.Count()</div>
-
-        <div class="col-sm-2">
-            <form asp-controller="IDCountries" asp-action="Details" method="post" role="form">
-                <div>
-                    <input asp-for="Id" value="@Model.Id" hidden /><br />
-                    <input type="submit" class="btn btn-primary" name="btnCountryDetails" value="Details" />
-                </div>
-            </form>
-        </div>
-
-        <div class="col-sm-2">
-            @if (Model.Cities.Count() == 0)
-            {
-                <form asp-controller="IDCountries" asp-action="Delete" method="post" role="form">
+    <tr>
+        <td>@Model.Name</td>
+        <td>@Model.Cities.Count()</td>
+        <td>
+                <form asp-controller="IDCountries" asp-action="Details" method="post" role="form">
                     <div>
-                        <input asp-for="Id" value="@Model.Id" hidden /><br />
-                        <input type="submit" class="btn btn-primary" name="btnCountryDelete" value="Delete" />
+                        <input asp-for="Id" value="@Model.Id" hidden />
+                        <input type="submit" class="btn btn-primary" name="btnCountryDetails" value="Details" />
                     </div>
-                 </form>
-            }
-        </div>
-       
-    </div>
-</div>
+                </form>
+        </td>
+
+        <td>
+                @if (Model.Cities.Count() == 0)
+                {
+                    <form asp-controller="IDCountries" asp-action="Delete" method="post" role="form">
+                        <div>
+                            <input asp-for="Id" value="@Model.Id" hidden /><br />
+                            <input type="submit" class="btn btn-primary" name="btnCountryDelete" value="Delete" />
+                        </div>
+                    </form>
+                }
+        </td>
+    </tr>

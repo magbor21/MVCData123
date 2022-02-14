@@ -1,19 +1,19 @@
 ﻿@model ApplicationUser
 
-<div class="container">
-    <dv class="row">
-        <div class="col-sm-2">@Model.FirstName</div>
-        <div class="col-sm-2">@Model.LastName</div>
-        <div class="col-sm-2">@Model.UserName</div>
-        <div class="col-sm-2">@Model.Email</div>
+
+<tr>
+    <td>@Model.FirstName</td>
+    <td>@Model.LastName</td>
+    <td>@Model.UserName</td>
+    <td>@Model.Email</td>
         
-        <div class="col-sm-2">
-            <form asp-controller="IDUsers" asp-action="AdminAdd" method="post" role="form">
-                <div>
-                    <input asp-for="Id" value="@Model.Id" hidden /><br />
-                    <input type="submit" class="btn btn-primary" name="btnPersonsDetails" value="Yes" />
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+    <td>
+        <form asp-controller="IDUsers" asp-action="AdminAdd" method="post" role="form">
+            <div>
+                <input asp-for="Id" value="@Model.Id" hidden />
+                <input type="submit" class="btn btn-primary" name="btnPersonsDetails" value="Yes" />
+            </div>
+        </form>
+    </td>
+</tr>
+

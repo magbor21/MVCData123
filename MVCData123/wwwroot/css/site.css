@@ -1,9 +1,23 @@
 ﻿body {
     font-family: Helvetica, sans-serif;
     height: 100%;
+    padding: 10px 0px 0px 0px;
 }
 
-/*
+
+#add {
+    max-width: 400px;
+    background-color: lightblue;
+    border: solid 1px dodgerblue;
+    padding: 10px 10px 10px 10px;
+    margin: 5px 5px 5px 5px;
+    width: fit-content;
+}
+
+form {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    /*
 header {
     height: fit-content;
 }
@@ -71,14 +85,7 @@ main {
     width: fit-content;
 }
 
-#add {
-    width: 200px;
-    background-color: lightblue;
-    border: solid 1px dodgerblue;
-    padding: 10px 10px 10px 10px;
-    margin: 5px 5px 5px 5px;
-    width: fit-content;
-}
+
 
 #errorEFMessages {
     color: rebeccapurple;
@@ -105,9 +112,7 @@ main {
 }
 
 
-form {
-    padding: 0px 10px 0px 10px;
-    margin: 0px 0px 0px 0px;
+
   
 
 }
@@ -119,7 +124,7 @@ input {
 }
 
     */
-footer {
+    footer {
     position: relative;
     bottom: 0;
     width: 100%;

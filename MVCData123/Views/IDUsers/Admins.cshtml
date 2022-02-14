@@ -4,21 +4,23 @@
     ViewData["Title"] = "Admins ";
 }
 
+<h3> Admins </h3>
 
-<h1> Admins </h1>
 
-
-<div class="container" id="fet">
-    <div class="row">
-        <div class="col-sm-2"> User name </div>
-        <div class="col-sm-2"> E-mail </div>
-    </div>
-
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th scope="col"> Username </th>
+            <th scope="col"> E-mail </th>
+        </tr>
+    </thead>
     @if (Model.Any() == true)
     {
+        <tbody>
         @foreach (var item in Model)
         {
             <partial name="_usersIDAdminPartial" model="item" />
         }
+        </tbody>
     }
-</div>
+</table>

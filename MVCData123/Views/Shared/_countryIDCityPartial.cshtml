@@ -2,14 +2,13 @@
 
 
 
-    <div class="row">
-        <div class="col-sm-2">
-            <form asp-controller="IDCities" asp-action="Details" method="post" role="form">
-                <div>
-                    <input asp-for="Id" value="@Model.Id" hidden /><br />
-                    <input type="submit" class="btn btn-primary" name="btnToPersonLanguages" value="@Model.Name" />
-                </div>
-            </form>
-
+<tr>
+    <td>
+        <form asp-controller="IDCities" asp-action="Details" method="post" role="form">
+        <div>
+            <input asp-for="Id" value="@Model.Id" hidden />
+            <input type="submit" class="btn btn-primary" name="btnToPersonLanguages" value="@Model.Name" />
         </div>
-    </div>
+        </form>
+    </td>
+</tr>

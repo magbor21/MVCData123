@@ -5,28 +5,34 @@
 }
 
 
-<h1> Cities </h1>
+<h3> Cities </h3>
 
 <div>
     <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Add", "IDCities")'">Add City</button>
+    <br />
 </div>
 
 <div id="errorEFMessages"></div>
 
-<div class="container" id="fet">
-    <div class="row">
-        <div class="col-sm-2"> Name </div>
-        <div class="col-sm-2"> Country </div>
-        <div class="col-sm-2"> Citizens </div>
-        <div class="col-sm-2"> Details </div>
-        <div class="col-sm-2"> Delete </div>
-    </div>
-</div>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th scope="col"> Name </th>
+            <th scope="col"> Country </th>
+            <th scope="col"> Citizens </th>
+            <th scope="col"> Details </th>
+            <th scope="col"> Delete </th>
+        </tr>
+    </thead>
 
-@if (Model.Any() == true)
-{
-    @foreach (var item in Model)
+
+    @if (Model.Any() == true)
     {
-        <partial name="_cityIDPartial" model="item" />
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <partial name="_cityIDPartial" model="item" />
+            }
+        </tbody>
     }
-}
+</table>

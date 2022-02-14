@@ -5,7 +5,7 @@
 }
 
 
-<h1> City Details </h1>
+<h3> City Details </h3>
 
 @if (Model != null)
 {
@@ -29,26 +29,29 @@
             <div>
                 <input type="submit" class="btn btn-primary" name="btnEditCity" value="Save" />
             </div>
-
-
         </form>
+        <br />
         <div>
             @if (Model.Citizens.Count() > 0)
             {
-                <div class="container" id="fet">
-                    <div class="row">
-                        <div class="col-sm-2"> Citizens </div>
-                    </div>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Citizens</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (PersonModel item in Model.Citizens)
+                        {
+                            <partial name="_cityIDPersonPartial" model="item" />
+                        }
+                    </tbody>
+                </table>
 
-                    @foreach (PersonModel item in Model.Citizens)
-                    {
-                        <partial name="_cityIDPersonPartial" model="item" />
-                    }
-
-                </div>
             }
         </div>
     </div>
+
 }
 else
 {

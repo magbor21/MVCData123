@@ -2,14 +2,15 @@
 
 
 
-    <div class="row">
-        <div class="col-sm-2">
+
+    <tr>
+
+        <td>
             <form asp-controller="IDPeople" asp-action="Details" method="post" role="form">
                 <div>
-                    <input asp-for="Id" value="@Model.Id" hidden /><br />
+                    <input asp-for="Id" value="@Model.Id" hidden />
                     <input type="submit" class="btn btn-primary" name="btnToPersonLanguages" value="@Model.Name" />
                 </div>
             </form>
-
-        </div>
-    </div>
+        </td>
+     </tr>
