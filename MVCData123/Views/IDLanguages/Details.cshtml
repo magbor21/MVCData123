@@ -1,0 +1,51 @@
+﻿@model Language
+
+@{
+    ViewData["Title"] = "Language Details ";
+}
+
+
+<h1> Language Details </h1>
+
+@if (Model != null)
+{
+
+    <div class="container" id="add">
+        <form asp-controller="IDLanguages" asp-action="LanguageEdit" method="post" role="form">
+            <div>
+                <label asp-for="Id">Language ID: @Model.Id </label><br />
+                <input asp-for="Id" type="text" value="@Model.Id" hidden/>
+            </div>
+
+            <div>
+                <label asp-for="Name"></label><br />
+                <input asp-for="Name" value="@Model.Name" /><br />
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" name="btnEditLanguage" value="Save" />
+            </div>
+
+
+        </form>
+        <div>
+            
+            <div class="container" id="fet">
+                <div class="row">
+                    <div class="col-sm-2"> Speakers </div>
+                </div>
+            </div>
+                
+            @foreach (PersonModel item in Model.Persons)
+            {
+                <partial name="_languageIDPersonPartial" model="item" />
+            }
+                 
+            
+                
+        </div>
+    </div>
+}
+else
+{
+    <span style="color:red">No country data available</span>
+}

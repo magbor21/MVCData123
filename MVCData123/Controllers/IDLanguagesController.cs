@@ -52,6 +52,25 @@ namespace MVCData123.Controllers
         }
 
         [HttpPost]
+        public IActionResult Details(Language languageValue)
+        {
+            Language language = _personContext.Languages.Find(languageValue.Id);
+
+            if (language != null)
+            {
+                var persons = _personContext.Persons
+                                .Where(p => p.PersonLanguages
+                                .Any(pl => pl.LanguageId == language.Id));
+
+                language.Persons = persons.ToList();
+
+            }
+
+            return View("Details", language);
+        }
+
+
+        [HttpPost]
         public IActionResult LanguageEdit(Language language)
         {
             if (ModelState.IsValid)

@@ -1,0 +1,15 @@
+﻿@model PersonModel
+
+
+
+    <div class="row">
+        <div class="col-sm-2">
+            <form asp-controller="IDPeople" asp-action="Details" method="post" role="form">
+                <div>
+                    <input asp-for="Id" value="@Model.Id" hidden /><br />
+                    <input type="submit" class="btn btn-primary" name="btnToPersonLanguages" value="@Model.Name" />
+                </div>
+            </form>
+
+        </div>
+    </div>

@@ -30,16 +30,18 @@
         <div>
             @if (Model.Cities.Count() > 0)
             {
-                <ul class="list-group">
-
-                    <li class="list-group-item list-group-item-success">Cities</li>
+                
+                <div class="container" id="fet">
+                    <div class="row">
+                        <div class="col-sm-2"> Cities </div>
+                    </div>
 
                     @foreach (City item in Model.Cities)
                     {
-                        <input type="button" class="btn btn-primary" onclick="cityIDDetails(this,  @item.Id)" value="@item.Name" />
+                        <partial name="_countryIDCityPartial" model="item" />
                     }
 
-                </ul>
+                </div>
             }
         </div>
     </div>

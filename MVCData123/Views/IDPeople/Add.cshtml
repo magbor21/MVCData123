@@ -1,0 +1,33 @@
+﻿@model PersonModel
+
+@{
+    ViewData["Title"] = "Add a Person ";
+}
+
+
+<h1>Add a Person </h1>
+
+<div id="errorEFMessages"></div>
+
+<div id="add">
+    <form asp-controller="IDPeople" asp-action="PersonAdd" method="post" role="form">
+        <!-- Add people-->
+        <div>
+            <label asp-for="Name"></label><br />
+            <input asp-for="Name" /><br />
+            <span style="color:rebeccapurple" asp-validation-for="Name"></span> <br />
+            <label asp-for="Phone"></label><br />
+            <input asp-for="Phone" /><br />
+            <span style="color:rebeccapurple" asp-validation-for="Phone"></span><br />
+            <div class="control-label">City</div>
+
+            <select asp-for="CurrentCityID" class="form-control" asp-items="ViewBag.Cities"> </select>
+            <span style="color:rebeccapurple" asp-validation-for="CurrentCityID"></span><br />
+            <br />
+        </div>
+
+        <div>
+            <input type="submit" class="btn btn-primary" name="btnAddPerson" value="Save Person" />
+        </div>
+    </form>
+</div>

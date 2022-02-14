@@ -1,0 +1,30 @@
+﻿@model IEnumerable<PersonModel>
+
+@{
+    ViewData["Title"] = "People ";
+}
+
+
+<h1> People </h1>
+
+<div>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Add", "IDPeople")'">Add Person</button>
+</div>
+
+<div class="container" id="fet">
+    <div class="row">
+        <div class="col-sm-2"> Name </div>
+        <div class="col-sm-2"> City </div>
+        <div class="col-sm-2"> Languages </div>
+        <div class="col-sm-2"> Details </div>
+        <div class="col-sm-2"> Delete </div>
+    </div>
+</div>
+
+@if (Model.Any() == true)
+{
+    @foreach (var item in Model)
+    {
+        <partial name="_personIDPartial" model="item" />
+    }
+}

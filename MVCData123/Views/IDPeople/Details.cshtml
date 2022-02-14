@@ -1,0 +1,66 @@
+﻿@model PersonModel
+@{
+    ViewData["Title"] = "Person Details ";
+}
+
+
+<h1> Person Details </h1>
+
+@if (Model != null)
+{
+
+    <div class="container" id="add">
+        <form asp-controller="IDPeople" asp-action="PersonEdit" method="post" role="form">
+            <div>
+                <label asp-for="Id">Person ID: @Model.Id </label><br />
+                <input asp-for="Id" type="text" value="@Model.Id" hidden />
+            </div>
+
+            <div>
+                <label asp-for="Name"></label><br />
+                <input asp-for="Name" value="@Model.Name" /><br />
+            </div>
+            <div>
+                <label asp-for="Phone"></label><br />
+                <input asp-for="Phone" value="@Model.Phone" /><br />
+            </div>
+            <div>
+                <div class="control-label">City</div>
+                <select asp-for="CurrentCityID" class="form-control" asp-items="ViewBag.Cities"></select><br />
+                <span style="color:rebeccapurple" asp-validation-for="CurrentCityID"></span> <br />
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" name="btnEditPerson" value="Save" />
+            </div>
+
+
+        </form>
+        <div>
+            @if (Model.PersonLanguages.Count() > 0)
+            {
+                <ul class="list-group">
+
+                    <li class="list-group-item list-group-item-success">Languages</li>
+
+                    @foreach (PersonLanguage item in Model.PersonLanguages)
+                    {
+                        <li class="list-group-item">@item.Language.Name</li>                       
+                    }
+
+                </ul>
+            }
+        </div>
+
+        <div>
+            <form asp-controller="IDPeople" asp-action="Languages" method="post" role="form">
+                <input asp-for="Id" type="text" value="@Model.Id" hidden />
+                <input type="submit" class="btn btn-primary" name="btnPersonLanguage" value="Edit Languages" />
+            </form>
+        </div>
+
+    </div>
+}
+else
+{
+    <span style="color:red">No person data available</span>
+}

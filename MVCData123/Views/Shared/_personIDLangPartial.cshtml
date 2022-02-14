@@ -1,0 +1,20 @@
+﻿@model PersonLanguage
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">@Model.Language.Name</div>
+
+        <div class="col-sm-2">
+            @if (User.IsInRole("Admin"))
+            {
+                <form asp-controller="IDPeople" asp-action="LanguageDelete" method="post" role="form">
+                    <div>
+                        <input asp-for="PersonId" value="@Model.PersonId" hidden /><br />
+                        <input asp-for="LanguageId" value="@Model.LanguageId" hidden /><br />
+                        <input type="submit" class="btn btn-primary" name="btnPersonLangDel" value="Delete" />
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>

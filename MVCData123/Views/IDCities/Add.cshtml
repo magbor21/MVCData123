@@ -2,16 +2,16 @@
 
 
 @{
-    ViewData["Title"] = "Add City ";
+    ViewData["Title"] = "Add a City ";
 }
 
 
-<h1> Add City </h1>
+<h1> Add a City </h1>
 
 @if (User.IsInRole("Admin"))
 {
     <div id="add">
-        <form asp-controller="IDCountries" asp-action="CityAdd" method="post" role="form">
+        <form asp-controller="IDCities" asp-action="CityAdd" method="post" role="form">
 
             <div>
                 <label asp-for="Name"></label><br />

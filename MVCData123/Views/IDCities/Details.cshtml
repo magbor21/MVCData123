@@ -35,21 +35,22 @@
         <div>
             @if (Model.Citizens.Count() > 0)
             {
-                <ul class="list-group">
-
-                    <li class="list-group-item list-group-item-success">Citizens</li>
+                <div class="container" id="fet">
+                    <div class="row">
+                        <div class="col-sm-2"> Citizens </div>
+                    </div>
 
                     @foreach (PersonModel item in Model.Citizens)
                     {
-                        <input type="button" class="btn btn-primary" onclick="personIDDetails(this,  @item.Id)" value="@item.Name" />
+                        <partial name="_cityIDPersonPartial" model="item" />
                     }
 
-                </ul>
+                </div>
             }
         </div>
     </div>
 }
 else
 {
-    <span style="color:red">No country data available</span>
+    <span style="color:red">No city data available</span>
 }

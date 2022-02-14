@@ -1,0 +1,55 @@
+﻿@model PersonLanguage
+
+@{
+    ViewData["Title"] = "Add Languages  ";
+}
+
+
+<h1> Add or remove Languages </h1>
+
+@if (Model != null)
+{
+
+    <div class="container" id="add">
+        <form asp-controller="IDPeople" asp-action="LanguageAdd" method="post" role="form">
+            <div>
+                <input asp-for="PersonId" type="text" value="@Model.Person.Id" hidden />
+            </div>
+
+            <div>
+                <label> "Name: @Model.Person.Name"</label><br />
+            </div>
+            <div>
+                <div class="control-label">Languages</div>
+                <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.Languages"></select><br />
+                <span style="color:rebeccapurple" asp-validation-for="LanguageId"></span> <br />
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" name="btnAddLanguage" value="Add" />
+            </div>
+
+        </form>
+        <div>
+            @if (Model.Person.PersonLanguages.Count() > 0)
+            {
+                <div class="container" id="fet">
+                    <div class="row">
+                        <div class="col-sm-2"> Language </div>
+                        <div class="col-sm-2"> Delete </div>
+                    </div>
+                </div>
+
+                @foreach (var item in Model.Person.PersonLanguages)
+                {
+                    <partial name="_personIDLangPartial" model="item" />
+                }
+            
+            }
+        </div>
+
+    </div>
+}
+else
+{
+    <span style="color:red">No person data available</span>
+}

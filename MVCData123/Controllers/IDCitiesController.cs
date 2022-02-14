@@ -90,5 +90,18 @@ namespace MVCData123.Controllers
             }
             return RedirectToAction("Index", "IDCities");
         }
+
+        [HttpPost]
+        public IActionResult Delete(City city)
+        {
+
+            var itemToRemove = _personContext.Cities.SingleOrDefault(r => r.Id == city.Id);
+            if (itemToRemove != null)
+            {
+                _personContext.Cities.Remove(itemToRemove);
+                _personContext.SaveChanges();
+            }
+            return RedirectToAction("Index", "IDCities");
+        }
     }
 }
